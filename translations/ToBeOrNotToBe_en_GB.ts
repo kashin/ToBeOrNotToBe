@@ -2,15 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_GB">
 <context>
+    <name>Flower</name>
+    <message>
+        <location filename="../assets/Flower.qml" line="7"/>
+        <location filename="../assets/Flower.qml" line="13"/>
+        <location filename="../assets/Flower.qml" line="28"/>
+        <source>He/She Loves Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Flower.qml" line="26"/>
+        <source>He/She Loves Me Not</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LovesMeTab</name>
     <message>
-        <location filename="../assets/LovesMeTab.qml" line="10"/>
+        <location filename="../assets/LovesMeTab.qml" line="11"/>
         <source>Reset image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/LovesMeTab.qml" line="25"/>
         <source>Loves Me Or Not</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/LovesMeTab.qml" line="31"/>
+        <source>resetFlower</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/LovesMeTab.qml" line="6"/>
+        <location filename="../assets/LovesMeTab.qml" line="43"/>
+        <source>Loves Me Or Not?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

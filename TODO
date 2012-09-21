@@ -1,1 +1,2 @@
 1) Fix rotation issue.
+2) Make center MUCHMUCHMUCH bigger, this will help to avoid onTouch problems with leafs.
