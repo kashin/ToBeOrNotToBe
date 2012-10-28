@@ -24,18 +24,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LovesMeTab.qml" line="25"/>
+        <location filename="../assets/LovesMeTab.qml" line="23"/>
         <source>Loves Me Or Not</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LovesMeTab.qml" line="31"/>
+        <location filename="../assets/LovesMeTab.qml" line="29"/>
         <source>resetFlower</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/LovesMeTab.qml" line="6"/>
-        <location filename="../assets/LovesMeTab.qml" line="43"/>
+        <location filename="../assets/LovesMeTab.qml" line="39"/>
         <source>Loves Me Or Not?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -58,22 +58,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="33"/>
+        <location filename="../assets/main.qml" line="31"/>
         <source>Tab 2 title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="57"/>
+        <location filename="../assets/main.qml" line="55"/>
         <source>Tab 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="68"/>
+        <location filename="../assets/main.qml" line="64"/>
         <source>Tab 3 title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="86"/>
+        <location filename="../assets/main.qml" line="80"/>
         <source>Tab 3 content</source>
         <translation type="unfinished"></translation>
     </message>

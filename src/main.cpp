@@ -1,5 +1,6 @@
 #include "app.hpp"
 
+#include <stdio.h>
 #include <QLocale>
 #include <QTranslator>
 
@@ -7,11 +8,18 @@
 
 using ::bb::cascades::Application;
 
+void myMessageOutput(QtMsgType type, const char* msg){
+               fprintf(stdout, "%s\n", msg);
+               fflush(stdout);
+}
+
 int main(int argc, char **argv)
 {
     //-- this is where the server is started etc
     Application app(argc, argv);
     
+    qInstallMsgHandler(myMessageOutput);
+
     //-- localization support
     QTranslator translator;
     QString locale_string = QLocale().name();

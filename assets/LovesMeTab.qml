@@ -19,9 +19,7 @@ Page {
         layout: StackLayout {
         }
         Label {
-            layoutProperties: StackLayoutProperties {
-                horizontalAlignment: HorizontalAlignment.Center
-            }
+            horizontalAlignment: HorizontalAlignment.Center
             text: qsTr("Loves Me Or Not")
             textStyle {
                 base: SystemDefaults.TextStyles.TitleText
@@ -37,9 +35,7 @@ Page {
         }
         Label {
             id: infoLabel
-            layoutProperties: StackLayoutProperties {
-                horizontalAlignment: HorizontalAlignment.Center
-            }
+            horizontalAlignment: HorizontalAlignment.Center
             text: qsTr("Loves Me Or Not?")
             textStyle {
                 base: SystemDefaults.TextStyles.BigText

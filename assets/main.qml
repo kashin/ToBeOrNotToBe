@@ -27,9 +27,7 @@ TabbedPane {
                 layout: StackLayout  {
                 }
                 Label {
-                    layoutProperties: StackLayoutProperties {
-                        horizontalAlignment: HorizontalAlignment.Center
-                    }
+                    horizontalAlignment: HorizontalAlignment.Center
                     text: qsTr("Tab 2 title")
                     textStyle {
                         base: SystemDefaults.TextStyles.TitleText
@@ -39,10 +37,10 @@ TabbedPane {
                     id: imgTab2
                     imageSource: "asset:///images/picture1.png"
                     layoutProperties: StackLayoutProperties {
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
                         spaceQuota: 1.0
                     }
+                    horizontalAlignment: HorizontalAlignment.Center
+                    verticalAlignment: VerticalAlignment.Center
                     scalingMethod: ScalingMethod.AspectFit
                     opacity: 0.2
                     animations: [
@@ -62,9 +60,7 @@ TabbedPane {
                 layout: StackLayout  {
                 }
                 Label {
-                    layoutProperties: StackLayoutProperties {
-                        horizontalAlignment: HorizontalAlignment.Center
-                    }
+                    horizontalAlignment: HorizontalAlignment.Center
                     text: qsTr("Tab 3 title")
                     textStyle {
                         base: SystemDefaults.TextStyles.TitleText
@@ -75,14 +71,12 @@ TabbedPane {
                     }
                     layoutProperties: StackLayoutProperties {
                         spaceQuota: 1.0
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        verticalAlignment: VerticalAlignment.Fill
                     }
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
                     Label {
-                        layoutProperties: DockLayoutProperties {
-                            horizontalAlignment: HorizontalAlignment.Center
-                            verticalAlignment: VerticalAlignment.Center
-                        }
+                        horizontalAlignment: HorizontalAlignment.Center
+                        verticalAlignment: VerticalAlignment.Center
                         text: qsTr ("Tab 3 content")
                     }
                 }
