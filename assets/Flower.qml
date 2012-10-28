@@ -31,8 +31,11 @@ Container {
     }
     layout: AbsoluteLayout {
     }
+    horizontalAlignment: HorizontalAlignment.Fill
+    verticalAlignment: VerticalAlignment.Fill
     preferredWidth: 768
     preferredHeight: 768
+    touchPropagationMode: TouchPropagationMode.PassThrough
     //another stupid part, a lot of leafs... since there is no way to create components dynamicaly, yet
     Leaf {
         id: leaf1

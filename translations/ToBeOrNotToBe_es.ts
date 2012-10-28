@@ -25,7 +25,13 @@
     </message>
     <message>
         <location filename="../assets/LovesMeTab.qml" line="23"/>
+        <location filename="../assets/LovesMeTab.qml" line="43"/>
         <source>Loves Me Or Not</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/LovesMeTab.qml" line="50"/>
+        <source>test touch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -35,7 +41,7 @@
     </message>
     <message>
         <location filename="../assets/LovesMeTab.qml" line="6"/>
-        <location filename="../assets/LovesMeTab.qml" line="39"/>
+        <location filename="../assets/LovesMeTab.qml" line="70"/>
         <source>Loves Me Or Not?</source>
         <translation type="unfinished"></translation>
     </message>
