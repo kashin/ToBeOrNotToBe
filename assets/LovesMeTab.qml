@@ -16,6 +16,7 @@ Page {
     ]
     // main container of the page
     Container {
+        touchPropagationMode: TouchPropagationMode.PassThrough
         layout: StackLayout {
         }
         Label {
@@ -47,5 +48,8 @@ Page {
                 infoLabel.text = text;
             }
         }
+    }
+    onCreationCompleted: {
+        resetFlower();
     }
 }
