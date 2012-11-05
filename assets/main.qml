@@ -2,6 +2,39 @@ import bb.cascades 1.0
 
 TabbedPane {
     showTabsOnActionBar: true
+
+// Menu
+    Menu.definition: MenuDefinition {
+        helpAction: HelpActionItem {
+            title: "About"
+            onTriggered: {
+                aboutSheet.open();
+            }
+        }
+        attachedObjects: [
+            Sheet {
+                id: aboutSheet
+                content: Page {
+                    Container {
+                        TextArea {
+                            editable: false;
+                            text: "Developed by: \n us \n :)"
+                            backgroundVisible: false
+                            verticalAlignment: VerticalAlignment.Fill
+                        }
+                        Button {
+                            text: "Close"
+                            onClicked: {
+                                aboutSheet.close();
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+
+//Tabs
     Tab {
         title: qsTr("Loves Me Or Not")
         LovesMeTab {

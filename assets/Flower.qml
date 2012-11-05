@@ -2,7 +2,7 @@ import bb.cascades 1.0
 
 Container {
     id: flowerContainer
-    property string lovesMeText: qsTr("He/She Loves Me")
+    property string lovesMeText: qsTr("Loves Me")
     property bool lovesMe: true
     //workaround since there is no lovesMeTextChanged signal by default
     signal lovesMeTextChanged(string text)
@@ -11,7 +11,7 @@ Container {
         flowerContainer.removeAll();
 
         lovesMe = true;
-        lovesMeText = qsTr("He/She Loves Me");
+        lovesMeText = qsTr("Loves Me");
         var rotationAngle = 15;
         // not less then 360/rotationAngle - 1 leafs should be on the screen to get 'full' flower (360 degrees) :)
         var leafsCount = Math.ceil(Math.random() * 12) + (360/rotationAngle - 1);
@@ -60,9 +60,9 @@ Container {
     function onLeafIsGone() {
         lovesMeTextChanged(lovesMeText);
         if (lovesMe) {
-            flowerContainer.lovesMeText = qsTr("He/She Loves Me Not");
+            flowerContainer.lovesMeText = qsTr("Loves Me Not");
         } else {
-            flowerContainer.lovesMeText = qsTr("He/She Loves Me");
+            flowerContainer.lovesMeText = qsTr("Loves Me");
         }
         lovesMe = ! lovesMe;
     }
