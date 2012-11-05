@@ -21,9 +21,7 @@ Container {
         var yMaximum = 135;
         var xDiff = 4*xMaximum/(360/rotationAngle);
         var yDiff = 4*yMaximum/(360/rotationAngle);
-        var increaseTranslationX = true;
         var xTranslation = -xDiff;
-        var increaseTranslationY = true;
         var yTranslation = -yMaximum - yDiff;
         while (i < leafsCount) {
             console.log("i = " + i);
@@ -31,23 +29,21 @@ Container {
             flowerContainer.add(createdLeaf);
             createdLeaf.leafIsGone.connect(flowerContainer.onLeafIsGone);
 
-            increaseTranslationX ? xTranslation += xDiff : xTranslation -= xDiff;
+            xTranslation = Math.sin(rotationAngle * i * Math.PI /180) * xMaximum;
             if (xTranslation >= xMaximum) {
-                increaseTranslationX = false;
                 xTranslation = xMaximum;
             } else if (xTranslation <= -xMaximum) {
-                increaseTranslationX = true;
                 xTranslation = -xMaximum;
             }
             createdLeaf.initialTranslationX = xTranslation ;
             console.log("X translation = " + xTranslation);
 
-            increaseTranslationY ? yTranslation += yDiff : yTranslation -= yDiff;
+            yTranslation = Math.cos(rotationAngle * i * Math.PI /180) * (-yMaximum);
+
+
             if (yTranslation >= yMaximum) {
-                increaseTranslationY = false;
                 yTranslation = yMaximum;
             } else if (yTranslation <= -yMaximum) {
-                increaseTranslationY = true;
                 yTranslation = -yMaximum;
             }
             createdLeaf.initialTranslationY = yTranslation ;
