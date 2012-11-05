@@ -9,45 +9,17 @@ TabbedPane {
         }
     }
     Tab {
-        title: qsTr("Tab 2")
-        Page {
-            id: tab2
-            actions: [ 
-            //-- define the actions for tab here
-            ActionItem {
-                    title: qsTr("Raise")
-                    onTriggered: {
-                        //-- run the image animation
-                        raiseAnimation.play();
-                    }
-                }
-            ]
-            Container {
-                //-- define tab content here
-                layout: StackLayout  {
-                }
-                Label {
-                    horizontalAlignment: HorizontalAlignment.Center
-                    text: qsTr("Tab 2 title")
-                    textStyle {
-                        base: SystemDefaults.TextStyles.TitleText
-                    }
-                }
-                ImageView {
-                    id: imgTab2
-                    imageSource: "asset:///images/picture1.png"
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1.0
-                    }
-                    horizontalAlignment: HorizontalAlignment.Center
-                    verticalAlignment: VerticalAlignment.Center
-                    scalingMethod: ScalingMethod.AspectFit
-                    opacity: 0.2
-                    animations: [
-                        //-- define animations for image here
-                        FadeTransition {id: raiseAnimation; fromOpacity: 0.2; toOpacity: 1; duration: 1000}                                         
-                    ]
-                }
+        attachedObjects: [
+            ComponentDefinition {
+                id: ballTabDef
+                source: "asset:///Ball/BallTab.qml"
+            }
+        ]
+        title: qsTr("Magic ball")
+        onTriggered: {
+            if (content == undefined) {
+                var ballPageCreated = ballTabDef.createObject(parent);
+                content = ballPageCreated;
             }
         }
     }
