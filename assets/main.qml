@@ -1,6 +1,7 @@
 import bb.cascades 1.0
-
+ 
 TabbedPane {
+    
     showTabsOnActionBar: true
     Tab {
         title: qsTr("Loves Me Or Not")
