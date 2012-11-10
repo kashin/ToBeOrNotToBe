@@ -1,3 +1,3 @@
-1) Smart dynamical Leaf's creation :)
-2) Fix rotation issue.
-3) Make center MUCHMUCHMUCH bigger, this will help to avoid onTouch problems with leafs. (or just try to play with touch propogation/overlap policy)
+1) Fix rotation issue.
+2) Fix WebView problem with "handle exit message". http://supportforums.blackberry.com/t5/Cascades-Development/Application-did-not-handle-exit-message-and-was-slayed/td-p/1825981/page/3
+3) Fix the support page and "mailto" links

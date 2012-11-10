@@ -28,6 +28,8 @@ Page {
         }
         Button {
             text: qsTr("resetFlower")
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
             onClicked: {
                 lovesMeTab.resetFlower();
             }

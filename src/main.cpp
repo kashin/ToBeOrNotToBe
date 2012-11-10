@@ -8,7 +8,7 @@
 
 using ::bb::cascades::Application;
 
-void myMessageOutput(QtMsgType type, const char* msg){
+void myMessageOutput(QtMsgType /*type*/, const char* msg){
                fprintf(stdout, "%s\n", msg);
                fflush(stdout);
 }
