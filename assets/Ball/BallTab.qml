@@ -1,6 +1,5 @@
 import bb.cascades 1.0
-//import Charts 1.0
-import my.library 1.0
+import tb.ntb 1.0
 
 Page {
     
@@ -26,15 +25,14 @@ Page {
 	            }
         }
         attachedObjects: [
-        BallLogic{
-            id: button
-            value: 1
-            valueChanged: {
-                labelProgress.setText("olala222");
+            BallLogic {
+                id: ballLogic
+                value: 1
+                onValueChanged: {
+                    labelProgress.setText("olala222");
+                }
             }
-        }
-    ]
-            
+        ]
         /*PieChart {
                      //id: aPieChart
                      //anchors.centerIn: parent

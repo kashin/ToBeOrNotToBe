@@ -3,13 +3,16 @@ import bb.cascades 1.0
 TabbedPane {
     
     showTabsOnActionBar: true
+    activeTab: flowerTab
     Tab {
+        id: flowerTab
         title: qsTr("Loves Me Or Not")
         LovesMeTab {
             id: lovesMeTab
         }
     }
     Tab {
+        id: ballTab
         attachedObjects: [
             ComponentDefinition {
                 id: ballTabDef

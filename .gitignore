@@ -1,5 +1,6 @@
 x86*
 assets/images/*
 assets/.preview*
+assets/Ball/.preview*
 .settings/*
 *Makefile*

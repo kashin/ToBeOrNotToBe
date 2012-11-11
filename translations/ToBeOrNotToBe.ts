@@ -43,27 +43,27 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="7"/>
+        <location filename="../assets/main.qml" line="9"/>
         <source>Loves Me Or Not</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="19"/>
+        <location filename="../assets/main.qml" line="25"/>
         <source>Magic ball</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="28"/>
+        <location filename="../assets/main.qml" line="34"/>
         <source>Tab 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="37"/>
+        <location filename="../assets/main.qml" line="43"/>
         <source>Tab 3 title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="53"/>
+        <location filename="../assets/main.qml" line="59"/>
         <source>Tab 3 content</source>
         <translation type="unfinished"></translation>
     </message>

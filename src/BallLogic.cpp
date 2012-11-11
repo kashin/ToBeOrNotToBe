@@ -7,24 +7,25 @@
 
 #include "BallLogic.hpp"
 
-/*BallLogic::BallLogic() {
-	// TODO Auto-generated constructor stub
+BallLogic::BallLogic(QObject* parent)
+: QObject(parent)
+{
+}
 
-}*/
+BallLogic::~BallLogic()
+{
 
-/*BallLogic::~BallLogic() {
-	// TODO Auto-generated destructor stub
-}*/
+}
 
-    int BallLogic::value()
-    {
-        return miValue;
-    }
+int BallLogic::value()
+{
+	return miValue;
+}
 
-    void BallLogic::setValue(int i)
-    {
-    	miValue = i;
-        emit valueChanged(miValue);
-    }
+void BallLogic::setValue(int i)
+{
+	miValue = i;
+	emit valueChanged(miValue);
+}
 
 
