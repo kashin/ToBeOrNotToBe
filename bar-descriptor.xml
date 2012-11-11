@@ -30,12 +30,17 @@
 
     <!-- The name that is displayed in the BlackBerry Tablet OS application installer. 
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>ToBeOrNotToBe</name>
+    <name>
+       ToBeOrNotToBe
+       <text xml:lang="en-US">ToBeOrNotToBe</text>
+       <text xml:lang="ru">&#x411;&#x44b;&#x442;&#x44c; &#x438;&#x43b;&#x438; &#x43d;&#x435; &#x431;&#x44b;&#x442;&#x44c;</text>
+    </name>
     
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required. -->
     <versionNumber>1.0.0</versionNumber>
+    <packageLocale>en-US,ru</packageLocale>
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the 
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
@@ -46,8 +51,12 @@
 
     <!-- Description, displayed in the BlackBerry Tablet OS application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <description>The ToBeOrNotToBe application</description>
-
+    <description>
+       The ToBeOrNotToBe application
+       <text xml:lang="en-US">The ToBeOrNotToBe application</text>
+       <text xml:lang="ru">&#x41f;&#x440;&#x438;&#x43b;&#x43e;&#x436;&#x435;&#x43d;&#x438;&#x435; &quot;&#x411;&#x44b;&#x442;&#x44c; &#x438;&#x43b;&#x438; &#x43d;&#x435; &#x431;&#x44b;&#x442;&#x44c;&quot;</text>
+    </description>
+    <cascadesTheme>dark</cascadesTheme>
     <!-- Copyright information. Optional. -->
     <!-- <copyright></copyright> -->
 
@@ -86,6 +95,12 @@
     <!--  The icon for the application, which should be 86x86. -->
     <icon>
         <image>icon.png</image>
+        <image>
+           <text xml:lang="en-US">icon.png</text>
+        </image>
+        <image>
+           <text xml:lang="ru">icon.png</text>
+        </image>
     </icon>
 
     <asset path="icon.png">icon.png</asset>
@@ -100,6 +115,7 @@
     
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
+    <permission>access_internet</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
 
     <!--  The permissions requested by your application. -->

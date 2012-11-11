@@ -2,7 +2,7 @@ import bb.cascades 1.0
 
 Container {
     id: flowerContainer
-    property string lovesMeText: qsTr("He/She Loves Me")
+    property string lovesMeText: qsTr("Loves Me")
     property bool lovesMe: true
     //workaround since there is no lovesMeTextChanged signal by default
     signal lovesMeTextChanged(string text)
@@ -11,10 +11,10 @@ Container {
         flowerContainer.removeAll();
 
         lovesMe = true;
-        lovesMeText = qsTr("He/She Loves Me");
-        var rotationAngle = 15;
+        lovesMeText = qsTr("Loves Me");
+        var rotationAngle = 17;
         // not less then 360/rotationAngle - 1 leafs should be on the screen to get 'full' flower (360 degrees) :)
-        var leafsCount = Math.ceil(Math.random() * 12) + (360/rotationAngle - 1);
+        var leafsCount = Math.ceil(Math.random() * 9) + (360/rotationAngle - 1);
 
         var i = 0;
         var xMaximum = 135;
@@ -24,10 +24,12 @@ Container {
         var xTranslation = -xDiff;
         var yTranslation = -yMaximum - yDiff;
         while (i < leafsCount) {
-            console.log("i = " + i);
             var createdLeaf = leafComponent.createObject(parent);
             flowerContainer.add(createdLeaf);
             createdLeaf.leafIsGone.connect(flowerContainer.onLeafIsGone);
+            createdLeaf.dragStarted.connect(flowerContainer.onDragLeafStarted);
+            createdLeaf.dragStoped.connect(flowerContainer.onDragLeafStoped);
+            createdLeaf.objectName = "leaf" + i;
 
             xTranslation = Math.sin(rotationAngle * i * Math.PI /180) * xMaximum;
             if (xTranslation >= xMaximum) {
@@ -36,7 +38,6 @@ Container {
                 xTranslation = -xMaximum;
             }
             createdLeaf.initialTranslationX = xTranslation ;
-            console.log("X translation = " + xTranslation);
 
             yTranslation = Math.cos(rotationAngle * i * Math.PI /180) * (-yMaximum);
 
@@ -47,7 +48,6 @@ Container {
                 yTranslation = -yMaximum;
             }
             createdLeaf.initialTranslationY = yTranslation ;
-            console.log("Y translation = " + yTranslation);
 
             createdLeaf.initialRotation = rotationAngle*i;
             i++;
@@ -57,20 +57,42 @@ Container {
         var createdCenter = chamomileCenterComponent.createObject(parent);
         flowerContainer.add(createdCenter);
     }
-    function onLeafIsGone() {
+
+    function onLeafIsGone(leaf) {
         lovesMeTextChanged(lovesMeText);
         if (lovesMe) {
-            flowerContainer.lovesMeText = qsTr("He/She Loves Me Not");
+            flowerContainer.lovesMeText = qsTr("Loves Me Not");
         } else {
-            flowerContainer.lovesMeText = qsTr("He/She Loves Me");
+            flowerContainer.lovesMeText = qsTr("Loves Me");
         }
         lovesMe = ! lovesMe;
+        flowerContainer.remove(leaf);
     }
+
+    function onDragLeafStarted(leaf) {
+        for (var j = 0 ; j < flowerContainer.count() - 1; j++) {
+            var leafObject = flowerContainer.at(j);
+            if (leafObject.objectName != leaf) {
+                leafObject.anotherLeafDragStarted = true;
+            }
+        }
+    }
+
+    function onDragLeafStoped(leaf) {
+        for (var j = 0 ; j < flowerContainer.count() - 1; j++) {
+            var leafObject = flowerContainer.at(j);
+            if (leafObject.objectName != leaf) {
+                leafObject.anotherLeafDragStarted = false;
+            }
+        }
+    }
+
     layout: DockLayout {
     }
+
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Fill
-    touchPropagationMode: TouchPropagationMode.PassThrough
+    touchPropagationMode: TouchPropagationMode.Full
     preferredHeight: 768
 
     attachedObjects: [

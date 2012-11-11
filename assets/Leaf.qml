@@ -1,8 +1,9 @@
 import bb.cascades 1.0
 
 ImageView {
+    id: leafImageView
     imageSource: "asset:///images/chamomile_leaf.png"
-    overlapTouchPolicy: OverlapTouchPolicy.Deny
+    overlapTouchPolicy: OverlapTouchPolicy.Allow
     horizontalAlignment: HorizontalAlignment.Center
     verticalAlignment: VerticalAlignment.Center
     preferredHeight: 200
@@ -15,13 +16,21 @@ ImageView {
     property bool isDragable: true
     property int firstTouchPositionX: 0
     property int firstTouchPositionY: 0
-    signal leafIsGone()
+    property bool anotherLeafDragStarted: false
+    property bool isDragStarted: false
+
+    signal leafIsGone(variant leaf)
+    signal dragStarted(variant leaf)
+    signal dragStoped(variant leaf)
+
     function resetLeaf() {
         translationY = initialTranslationY;
         translationX = initialTranslationX;
         rotationZ = initialRotation;
         isDragable = true;
         visible = true;
+        anotherLeafDragStarted = false;
+        isDragStarted = false;
     }
 
     onInitialTranslationXChanged: {
@@ -35,7 +44,7 @@ ImageView {
     }
 
     onTouch: {
-        if (! isDragable) {
+        if (! isDragable || anotherLeafDragStarted) {
             return;
         }
 
@@ -43,7 +52,9 @@ ImageView {
         if (event.isDown()) {
             firstTouchPositionX = event.windowX;
             firstTouchPositionY = event.windowY;
-        } else if (event.isMove()) {
+            isDragStarted = true;
+            dragStarted(leafImageView.objectName);
+        } else if (event.isMove() && isDragStarted) {
             var currentY = event.windowY - firstTouchPositionY;
             var currentX = event.windowX - firstTouchPositionX;
             // lets count Z rotation
@@ -51,10 +62,11 @@ ImageView {
             rotationZ = - ((Math.atan(currentX / currentY) * 180 / Math.PI)) + initialRotation;
             translationY = initialTranslationY + currentY;
             translationX = initialTranslationX + currentX;
-        } else if (event.isUp()) {
-            console.log("leaf is not dragable anymore");
+        } else if (event.isUp() && isDragStarted) {
+            dragStoped(leafImageView.objectName);
             isDragable = false;
-            leafIsGone();
+            isDragStarted = false;
+            fadeOutTransition.play();
         }
     }
     onCreationCompleted: {
@@ -62,4 +74,16 @@ ImageView {
         translationX = initialTranslationX;
         translationY = initialTranslationY;
     }
+    animations: [
+        FadeTransition {
+            id: fadeOutTransition
+            fromOpacity: 1.0
+            toOpacity: 0.0
+            duration: 300
+            target: leafImageView
+            onEnded: {
+                target.leafIsGone(leafImageView);
+            }
+        }
+    ]
 }

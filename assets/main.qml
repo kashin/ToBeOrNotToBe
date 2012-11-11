@@ -1,9 +1,57 @@
 import bb.cascades 1.0
- 
+
 TabbedPane {
     
     showTabsOnActionBar: true
     activeTab: flowerTab
+// Menu
+    Menu.definition: MenuDefinition {
+        helpAction: HelpActionItem {
+            id: aboutHelpAction
+            title: qsTr("About")
+            property variant createdSheet: 0
+
+            function onSheetClosed() {
+                delete createdSheet;
+                createdSheet = 0;
+            }
+
+            onTriggered: {
+                createdSheet = aboutSheetDef.createObject(parent);
+                createdSheet.closed.connect(onSheetClosed);
+                createdSheet.open();
+            }
+        }
+        attachedObjects: [
+            // FIXME: Workaround for "application can't handle 'exit' signal"
+            // Adds a different problem with couple of "ERROR: Context: Object name=" <ObjectName> " [objectId= <id> ] not unrealized" errors
+            ComponentDefinition {
+                id: aboutSheetDef
+                content: Sheet {
+                    id: aboutSheet
+                    peekEnabled: false
+                    content: Page {
+                        Container {
+                            id: aboutContainer
+                            background: Color.Black
+                            AboutWebView {
+                            }
+                            Button {
+                                text: "Close"
+                                horizontalAlignment: HorizontalAlignment.Center
+                                verticalAlignment: VerticalAlignment.Center
+                                onClicked: {
+                                    aboutSheet.close();
+                                }
+                            }
+                        } // aboutContainer
+                    } // Page
+                } // aboutSheet
+            }
+        ]
+    }
+
+//Tabs
     Tab {
         id: flowerTab
         title: qsTr("Loves Me Or Not")
