@@ -6,12 +6,12 @@
     <message>
         <location filename="../assets/Flower.qml" line="5"/>
         <location filename="../assets/Flower.qml" line="14"/>
-        <location filename="../assets/Flower.qml" line="65"/>
+        <location filename="../assets/Flower.qml" line="66"/>
         <source>Loves Me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Flower.qml" line="63"/>
+        <location filename="../assets/Flower.qml" line="64"/>
         <source>Loves Me Not</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30,7 +30,7 @@
     </message>
     <message>
         <location filename="../assets/LovesMeTab.qml" line="30"/>
-        <source>resetFlower</source>
+        <source>One More Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -16,7 +16,7 @@ Page {
     ]
     // main container of the page
     Container {
-        touchPropagationMode: TouchPropagationMode.PassThrough
+        touchPropagationMode: TouchPropagationMode.Full
         layout: StackLayout {
         }
         Label {
@@ -27,7 +27,7 @@ Page {
             }
         }
         Button {
-            text: qsTr("resetFlower")
+            text: qsTr("One More Time")
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
             onClicked: {
