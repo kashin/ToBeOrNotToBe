@@ -21,6 +21,12 @@ TabbedPane {
                 createdSheet.open();
             }
         }
+        settingsAction: SettingsActionItem {
+                            id: settingsAction
+                            onTriggered: {
+                                settingsSheet.open();
+                            }
+                        }
         attachedObjects: [
             // FIXME: Workaround for "application can't handle 'exit' signal"
             // Adds a different problem with couple of "ERROR: Context: Object name=" <ObjectName> " [objectId= <id> ] not unrealized" errors
@@ -46,6 +52,9 @@ TabbedPane {
                         } // aboutContainer
                     } // Page
                 } // aboutSheet
+            }, // ComponentDefinition
+            SettingsSheet {
+                id: settingsSheet
             }
         ]
     }
