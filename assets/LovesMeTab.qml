@@ -1,4 +1,6 @@
 import bb.cascades 1.0
+import bb.multimedia 1.0
+import tb.ntb 1.0
 
 Page {
     id: lovesMeTab
@@ -48,10 +50,23 @@ Page {
             id: flower
             onLovesMeTextChanged: {
                 infoLabel.text = text;
+
+                //FIXME: right now MediaPlayer API requires absolute path. Fix it to "asset:///sounds/<file>" as soon as API is fixed.
+                media.setSourceUrl( applicationSettings.value("flowerVoice",
+                                   "/accounts/1000/appdata/com.example.ToBeOrNotToBe.testDev_BeOrNotToBe121b515f/app/native/assets/sounds/flowerDefaultVoice.WAV") );
+                media.play();
             }
         }
     }
     onCreationCompleted: {
         resetFlower();
     }
+    attachedObjects: [
+            Settings {
+                id: applicationSettings
+            },
+            MediaPlayer {
+                id: media
+        }
+    ]
 }

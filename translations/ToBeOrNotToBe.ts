@@ -19,23 +19,23 @@
 <context>
     <name>LovesMeTab</name>
     <message>
-        <location filename="../assets/LovesMeTab.qml" line="11"/>
+        <location filename="../assets/LovesMeTab.qml" line="13"/>
         <source>Reset image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LovesMeTab.qml" line="24"/>
+        <location filename="../assets/LovesMeTab.qml" line="26"/>
         <source>Loves Me Or Not</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LovesMeTab.qml" line="30"/>
+        <location filename="../assets/LovesMeTab.qml" line="32"/>
         <source>One More Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/LovesMeTab.qml" line="6"/>
-        <location filename="../assets/LovesMeTab.qml" line="42"/>
+        <location filename="../assets/LovesMeTab.qml" line="8"/>
+        <location filename="../assets/LovesMeTab.qml" line="44"/>
         <source>Loves Me Or Not?</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,4 +1,5 @@
 x86*
+assets/sounds/*
 assets/images/*
 assets/*.preview*
 .settings/*

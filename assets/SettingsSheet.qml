@@ -22,10 +22,12 @@ Sheet {
                 checked: true
                 onCheckedChanged: {
                     if (checked) {
-                        applicationSettings.setValue("flowerVoice", "flowerDefaultVoice");
+                        applicationSettings.setValue("flowerVoice",
+                         "/accounts/1000/appdata/com.example.ToBeOrNotToBe.testDev_BeOrNotToBe121b515f/app/native/assets/sounds/flowerDefaultVoice.WAV");
                     } else {
                         if (flowerVoicesDropDown.selectedOption != 0) {
-                            applicationSettings.setValue("flowerVoice", flowerVoicesDropDown.selectedValue);
+                            applicationSettings.setValue("flowerVoice",
+                             "/accounts/1000/appdata/com.example.ToBeOrNotToBe.testDev_BeOrNotToBe121b515f/app/native/assets/sounds/" + flowerVoicesDropDown.selectedValue);
                         }
                     }
                 }
