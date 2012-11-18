@@ -1,3 +1,5 @@
 x86*
+assets/images/*
 assets/*.preview*
+.settings/*
 *Makefile*
