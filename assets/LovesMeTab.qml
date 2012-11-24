@@ -51,10 +51,18 @@ Page {
             onLovesMeTextChanged: {
                 infoLabel.text = text;
 
-                //FIXME: right now MediaPlayer API requires absolute path. Fix it to "asset:///sounds/<file>" as soon as API is fixed.
-                media.setSourceUrl( applicationSettings.value("flowerVoice",
-                                   "/accounts/1000/appdata/com.example.ToBeOrNotToBe.testDev_BeOrNotToBe121b515f/app/native/assets/sounds/flowerDefaultVoice.WAV") );
-                media.play();
+                if (!applicationSettings.mute) {
+                    var source;
+                    if (applicationSettings.useDefaultFlowerVoice) {
+                        source = applicationSettings.flowerVoiceDefault
+                               + (lovesMe ? "1.WAV": "2.WAV");
+                    } else {
+                        source = applicationSettings.flowerVoice
+                               + (lovesMe ? "1.WAV": "2.WAV");
+                    }
+                    media.setSourceUrl( source );
+                    media.play();
+                }
             }
         }
     }

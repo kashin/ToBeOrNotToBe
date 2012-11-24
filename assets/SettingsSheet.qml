@@ -19,21 +19,21 @@ Sheet {
             }
             ToggleButton {
                 id: flowerVoiceToggle
-                checked: true
+                checked: applicationSettings.useDefaultFlowerVoice
                 onCheckedChanged: {
                     if (checked) {
-                        applicationSettings.setValue("flowerVoice",
-                         "/accounts/1000/appdata/com.example.ToBeOrNotToBe.testDev_BeOrNotToBe121b515f/app/native/assets/sounds/flowerDefaultVoice.WAV");
+                         applicationSettings.useDefaultFlowerVoice = true;
                     } else {
                         if (flowerVoicesDropDown.selectedOption != 0) {
-                            applicationSettings.setValue("flowerVoice",
-                             "/accounts/1000/appdata/com.example.ToBeOrNotToBe.testDev_BeOrNotToBe121b515f/app/native/assets/sounds/" + flowerVoicesDropDown.selectedValue);
+                         applicationSettings.useDefaultFlowerVoice = false;
+                         applicationSettings.flowerVoice = flowerVoicesDropDown.selectedValue;
                         }
                     }
                 }
             }
             DropDown {
                 id: flowerVoicesDropDown
+                title: "disable for now"
                 visible: !flowerVoiceToggle.checked
             }
             Divider {

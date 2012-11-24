@@ -1,10 +1,35 @@
 import bb.cascades 1.0
+import tb.ntb 1.0
 
 TabbedPane {
     showTabsOnActionBar: true
 
 // Menu
     Menu.definition: MenuDefinition {
+        actions: [
+            ActionItem {
+                id: muteAction
+                imageSource: "asset:///images/sounds_on.png"
+                title: qsTr("Sounds on")
+
+                function updateSoundsAction() {
+                    if (applicationSettings.mute) {
+                        imageSource = "asset:///images/sounds_off.png";
+                        title = qsTr("Sounds off");
+                    } else {
+                        imageSource = "asset:///images/sounds_on.png";
+                        title = qsTr("Sounds on");
+                    }
+                }
+                onTriggered: {
+                    applicationSettings.mute = !applicationSettings.mute;
+                    updateSoundsAction();
+                }
+                onCreationCompleted: {
+                    updateSoundsAction();
+                }
+            }
+        ]
         helpAction: HelpActionItem {
             id: aboutHelpAction
             title: qsTr("About")
@@ -55,6 +80,9 @@ TabbedPane {
             }, // ComponentDefinition
             SettingsSheet {
                 id: settingsSheet
+            },
+            Settings {
+                id: applicationSettings
             }
         ]
     }
