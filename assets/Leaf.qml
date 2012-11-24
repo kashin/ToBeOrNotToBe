@@ -18,6 +18,9 @@ ImageView {
     property int firstTouchPositionY: 0
     property bool anotherLeafDragStarted: false
     property bool isDragStarted: false
+    property int previousCurrentY: 0
+    property int fullRoundsCount: 0
+    property int countBeforeRemoveInitialRotation: 5
 
     signal leafIsGone(variant leaf)
     signal dragStarted(variant leaf)
@@ -31,6 +34,7 @@ ImageView {
         visible = true;
         anotherLeafDragStarted = false;
         isDragStarted = false;
+        countBeforeRemoveInitialRotation = 5;
     }
 
     onInitialTranslationXChanged: {
@@ -50,34 +54,44 @@ ImageView {
 
         // Checking for a press, then set the state variables we need.
         if (event.isDown()) {
-            console.log("objectName= " + leafImageView.objectName);
+            // FIXME: we should use a flower's center coordinates as a base coordinates.
             firstTouchPositionX = event.windowX;
             firstTouchPositionY = event.windowY;
             isDragStarted = true;
+            previousCurrentY = 0;
+            fullRoundsCount = 0;
             dragStarted(leafImageView.objectName);
-            console.log("current firstTouchPositionX= " + firstTouchPositionX);
-            console.log("current firstTouchPositionY= " + firstTouchPositionY);
         } else if (event.isMove() && isDragStarted) {
-            console.log("objectName= " + leafImageView.objectName);
-            console.log("event.windowX= " + event.windowX);
-            console.log("event.windowY= " + event.windowY);
-            console.log("current translationX= " + translationX);
-            console.log("current translationY= " + translationY);
             var currentY = event.windowY - firstTouchPositionY;
             var currentX = event.windowX - firstTouchPositionX;
             // lets count Z rotation
-            // FIXME: find a better way to get a rotation angle.
-            rotationZ = - ((Math.atan(currentX / currentY) * 180 / Math.PI)) + initialRotation;
+            var angle = - ((Math.atan(currentX / currentY) * 180 / Math.PI));
+            if (currentY > 0) {
+                var additionalAngle = 180;
+                if (previousCurrentY < 0 && currentX < 0) {
+                    fullRoundsCount--;
+                }
+                additionalAngle += 360*fullRoundsCount;
+                rotationZ = angle + additionalAngle + initialRotation;
+            } else if (currentY < 0 ){
+                var additionalAngle = 0;
+                if (previousCurrentY > 0 && currentX < 0) {
+                    fullRoundsCount++;
+                }
+                additionalAngle += 360*fullRoundsCount;
+                rotationZ = angle + additionalAngle + initialRotation;
+            }
+            if (countBeforeRemoveInitialRotation >= 0) {
+                countBeforeRemoveInitialRotation--
+                if (countBeforeRemoveInitialRotation == 0) {
+                    // FIXME: we need to update this value, because rigth we have an unnecessary rotation (from initialRotation angle to 0)
+                    initialRotation = 0;
+                }
+            }
+            previousCurrentY = currentY
             translationY = initialTranslationY + currentY;
             translationX = initialTranslationX + currentX;
-            console.log("new translationX= " + translationX);
-            console.log("new translationY= " + translationY);
         } else if (event.isUp() && isDragStarted) {
-            console.log("objectName= " + leafImageView.objectName);
-            console.log("event.windowX= " + event.windowX);
-            console.log("event.windowY= " + event.windowY);
-            console.log("last translationX= " + translationX);
-            console.log("last translationY= " + translationY);
             dragStoped(leafImageView.objectName);
             isDragable = false;
             isDragStarted = false;

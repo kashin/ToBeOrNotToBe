@@ -1,4 +1,4 @@
 1) Create an MediaPlayer component that works according to the application 'mute' setting to avoid 'copy-paste' porblems on a different tabs.
-2) Fix rotation issue.
+2) We should use a flower's center coordinates as a base coordinates.
 3) Fix WebView problem with "handle exit message". http://supportforums.blackberry.com/t5/Cascades-Development/Application-did-not-handle-exit-message-and-was-slayed/td-p/1825981/page/3
 4) Fix the support page and "mailto" links

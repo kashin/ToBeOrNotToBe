@@ -49,6 +49,7 @@ TabbedPane {
         settingsAction: SettingsActionItem {
                             id: settingsAction
                             onTriggered: {
+                                settingsSheet.updateSettings();
                                 settingsSheet.open();
                             }
                         }
@@ -80,6 +81,9 @@ TabbedPane {
             }, // ComponentDefinition
             SettingsSheet {
                 id: settingsSheet
+                onClosed: {
+                    muteAction.updateSoundsAction();
+                }
             },
             Settings {
                 id: applicationSettings

@@ -3,6 +3,11 @@ import tb.ntb 1.0
 
 Sheet {
     id: settingsSheet
+
+    function updateSettings() {
+        muteButton.checked = applicationSettings.mute
+    }
+
     content: Page {
         titleBar: TitleBar {
             acceptAction: ActionItem {
@@ -24,17 +29,33 @@ Sheet {
                     if (checked) {
                          applicationSettings.useDefaultFlowerVoice = true;
                     } else {
-                        if (flowerVoicesDropDown.selectedOption != 0) {
-                         applicationSettings.useDefaultFlowerVoice = false;
-                         applicationSettings.flowerVoice = flowerVoicesDropDown.selectedValue;
+                        if (flowerVoicesDropDown.selectedValue) {
+                            applicationSettings.useDefaultFlowerVoice = false;
+                            applicationSettings.flowerVoice = flowerVoicesDropDown.selectedValue;
                         }
                     }
                 }
             }
             DropDown {
                 id: flowerVoicesDropDown
-                title: "disable for now"
+                title: "disabled for now"
                 visible: !flowerVoiceToggle.checked
+                options: [
+                    Option {
+                        value: "not supported"
+                        text: "not supported"
+                    }
+                ]
+            }
+            Divider {
+            }
+            CheckBox {
+                id: muteButton
+                text: qsTr("Mute sounds")
+                checked: applicationSettings.mute
+                onCheckedChanged: {
+                    applicationSettings.mute = checked
+                }
             }
             Divider {
             }

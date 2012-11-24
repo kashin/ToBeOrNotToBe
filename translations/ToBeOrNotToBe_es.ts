@@ -43,13 +43,18 @@
 <context>
     <name>SettingsSheet</name>
     <message>
-        <location filename="../assets/SettingsSheet.qml" line="9"/>
+        <location filename="../assets/SettingsSheet.qml" line="14"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsSheet.qml" line="18"/>
+        <location filename="../assets/SettingsSheet.qml" line="23"/>
         <source>Flower&apos;s sample voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsSheet.qml" line="54"/>
+        <source>Mute sounds</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -72,37 +77,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="92"/>
+        <location filename="../assets/main.qml" line="96"/>
         <source>Loves Me Or Not</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="98"/>
+        <location filename="../assets/main.qml" line="102"/>
         <source>Tab 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="104"/>
+        <location filename="../assets/main.qml" line="108"/>
         <source>Raise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="117"/>
+        <location filename="../assets/main.qml" line="121"/>
         <source>Tab 2 title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="141"/>
+        <location filename="../assets/main.qml" line="145"/>
         <source>Tab 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="150"/>
+        <location filename="../assets/main.qml" line="154"/>
         <source>Tab 3 title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="166"/>
+        <location filename="../assets/main.qml" line="170"/>
         <source>Tab 3 content</source>
         <translation type="unfinished"></translation>
     </message>
