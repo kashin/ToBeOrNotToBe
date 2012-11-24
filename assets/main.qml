@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import tb.ntb 1.0
 
 TabbedPane {
     
@@ -6,6 +7,30 @@ TabbedPane {
     activeTab: flowerTab
 // Menu
     Menu.definition: MenuDefinition {
+        actions: [
+            ActionItem {
+                id: muteAction
+                imageSource: "asset:///images/sounds_on.png"
+                title: qsTr("Sounds on")
+
+                function updateSoundsAction() {
+                    if (applicationSettings.mute) {
+                        imageSource = "asset:///images/sounds_off.png";
+                        title = qsTr("Sounds off");
+                    } else {
+                        imageSource = "asset:///images/sounds_on.png";
+                        title = qsTr("Sounds on");
+                    }
+                }
+                onTriggered: {
+                    applicationSettings.mute = !applicationSettings.mute;
+                    updateSoundsAction();
+                }
+                onCreationCompleted: {
+                    updateSoundsAction();
+                }
+            }
+        ]
         helpAction: HelpActionItem {
             id: aboutHelpAction
             title: qsTr("About")
@@ -22,6 +47,13 @@ TabbedPane {
                 createdSheet.open();
             }
         }
+        settingsAction: SettingsActionItem {
+                            id: settingsAction
+                            onTriggered: {
+                                settingsSheet.updateSettings();
+                                settingsSheet.open();
+                            }
+                        }
         attachedObjects: [
             // FIXME: Workaround for "application can't handle 'exit' signal"
             // Adds a different problem with couple of "ERROR: Context: Object name=" <ObjectName> " [objectId= <id> ] not unrealized" errors
@@ -47,6 +79,15 @@ TabbedPane {
                         } // aboutContainer
                     } // Page
                 } // aboutSheet
+            }, // ComponentDefinition
+            SettingsSheet {
+                id: settingsSheet
+                onClosed: {
+                    muteAction.updateSoundsAction();
+                }
+            },
+            Settings {
+                id: applicationSettings
             }
         ]
     }

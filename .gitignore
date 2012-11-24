@@ -1,5 +1,6 @@
 x86*
 *.orig
+assets/sounds/*
 assets/images/*
 assets/*.preview*
 assets/Ball/.preview*

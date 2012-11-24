@@ -1,4 +1,6 @@
 import bb.cascades 1.0
+import bb.multimedia 1.0
+import tb.ntb 1.0
 
 Page {
     id: lovesMeTab
@@ -48,10 +50,31 @@ Page {
             id: flower
             onLovesMeTextChanged: {
                 infoLabel.text = text;
+
+                if (!applicationSettings.mute) {
+                    var source;
+                    if (applicationSettings.useDefaultFlowerVoice) {
+                        source = applicationSettings.flowerVoiceDefault
+                               + (lovesMe ? "1.WAV": "2.WAV");
+                    } else {
+                        source = applicationSettings.flowerVoice
+                               + (lovesMe ? "1.WAV": "2.WAV");
+                    }
+                    media.setSourceUrl( source );
+                    media.play();
+                }
             }
         }
     }
     onCreationCompleted: {
         resetFlower();
     }
+    attachedObjects: [
+            Settings {
+                id: applicationSettings
+            },
+            MediaPlayer {
+                id: media
+        }
+    ]
 }

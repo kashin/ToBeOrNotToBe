@@ -74,7 +74,7 @@
     </initialWindow>
     
     <!--  The category where the application appears. Either core.games or core.media. -->
-    <category>core.media</category>
+    <category>core.games</category>
     <configuration id="com.qnx.qcc.toolChain.980791570" name="Default">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/ToBeOrNotToBe" entry="true" type="Qnx/Elf">ToBeOrNotToBe</asset>
@@ -116,17 +116,7 @@
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
     <permission>access_internet</permission>
+    <permission>access_shared</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
-
-    <!--  The permissions requested by your application. -->
-    <!--  <action>access_shared</action> -->
-    <!--  <action>record_audio</action> -->
-    <!--  <action>read_geolocation</action> -->
-    <!--  <action>use_camera</action> -->
-    <!--  <action>access_internet</action> -->
-    <!--  <action>play_audio</action> -->
-    <!--  <action>post_notification</action> -->
-    <!--  <action>set_audio_volume</action> -->
-    <!--  <action>read_device_identifying_information</action> -->
 
 </qnx>
