@@ -4,5 +4,6 @@ translations/*.ts
 assets/sounds/*
 assets/images/*
 assets/*.preview*
+assets/AskRandom/*.preview*
 .settings/*
 *Makefile*
