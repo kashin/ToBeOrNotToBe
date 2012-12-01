@@ -49,9 +49,16 @@ TabbedPane {
         }
         settingsAction: SettingsActionItem {
                             id: settingsAction
+                            property variant createdSheet: 0
+                            function onSheetClosed() {
+                                delete createdSheet;
+                                createdSheet = 0;
+                            }
+
                             onTriggered: {
-                                settingsSheet.updateSettings();
-                                settingsSheet.open();
+                                createdSheet = settingsSheetDef.createObject(parent);
+                                createdSheet.closed.connect(onSheetClosed);
+                                createdSheet.open();
                             }
                         }
         attachedObjects: [
@@ -80,10 +87,13 @@ TabbedPane {
                     } // Page
                 } // aboutSheet
             }, // ComponentDefinition
-            SettingsSheet {
-                id: settingsSheet
-                onClosed: {
-                    muteAction.updateSoundsAction();
+            ComponentDefinition {
+                id: settingsSheetDef
+                content: SettingsSheet {
+                    id: settingsSheet
+                    onClosed: {
+                        muteAction.updateSoundsAction();
+                    }
                 }
             },
             Settings {
@@ -117,35 +127,20 @@ TabbedPane {
         }
     }
     Tab {
-        title: qsTr("Tab 3")
-        Page {
-            id: tab3
-            Container {
-                //-- define tab content here
-                layout: StackLayout  {
-                }
-                Label {
-                    horizontalAlignment: HorizontalAlignment.Center
-                    text: qsTr("Tab 3 title")
-                    textStyle {
-                        base: SystemDefaults.TextStyles.TitleText
-                    }
-                }
-                Container {
-                    layout: DockLayout {
-                    }
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1.0
-                    }
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Fill
-                    Label {
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
-                        text: qsTr ("Tab 3 content")
-                    }
-                }
+        id: askRandomTab
+        title: qsTr("Ask Random")
+        onTriggered: {
+            if (content == undefined) {
+                console.log("new content for the tab");
+                var createdTab = askRandomTabDef.createObject(parent);
+                content = createdTab;
             }
         }
+        attachedObjects: [
+            ComponentDefinition {
+                id: askRandomTabDef
+                source: "asset:///AskRandom/AskRandomTab.qml"
+            }
+        ]
     }
 }

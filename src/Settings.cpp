@@ -43,7 +43,7 @@ bool Settings::useDefaultFlowerVoice()
 QString Settings::flowerVoiceDefault()
 {
     //FIXME: right now MediaPlayer API requires absolute path. Fix it to "asset:///sounds/<file>" as soon as API is fixed.
-	return "/accounts/1000/appdata/com.example.ToBeOrNotToBe.testDev_BeOrNotToBe121b515f/app/native/assets/sounds/flowerDefaultVoice";
+	return "asset:///sounds/flowerDefaultVoice";
 }
 
 void Settings::setFlowerVoice(const QString& newFlowerVoice)

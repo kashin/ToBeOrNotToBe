@@ -1,8 +1,10 @@
 x86*
 *.orig
+translations/*.ts
 assets/sounds/*
 assets/images/*
 assets/*.preview*
 assets/Ball/.preview*
+assets/AskRandom/*.preview*
 .settings/*
 *Makefile*

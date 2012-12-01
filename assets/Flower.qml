@@ -17,8 +17,8 @@ Container {
         var leafsCount = Math.ceil(Math.random() * 9) + (360/rotationAngle - 1);
 
         var i = 0;
-        var xMaximum = 135;
-        var yMaximum = 135;
+        var xMaximum = 170;
+        var yMaximum = 170;
         var xDiff = 4*xMaximum/(360/rotationAngle);
         var yDiff = 4*yMaximum/(360/rotationAngle);
         var xTranslation = -xDiff;
@@ -108,8 +108,8 @@ Container {
                     horizontalAlignment: HorizontalAlignment.Center
                     verticalAlignment: VerticalAlignment.Center
                     scalingMethod: ScalingMethod.Fill
-                    preferredHeight: 200
-                    preferredWidth: 200
+                    preferredHeight: 270
+                    preferredWidth: 270
                 }
         }
     ]

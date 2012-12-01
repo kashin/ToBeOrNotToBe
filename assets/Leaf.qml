@@ -6,8 +6,8 @@ ImageView {
     overlapTouchPolicy: OverlapTouchPolicy.Allow
     horizontalAlignment: HorizontalAlignment.Center
     verticalAlignment: VerticalAlignment.Center
-    preferredHeight: 200
-    preferredWidth: 200
+    preferredHeight: 220
+    preferredWidth: 220
     scalingMethod: ScalingMethod.AspectFit
 
     property int initialRotation: 0

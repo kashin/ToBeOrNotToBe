@@ -10,7 +10,8 @@ Page {
     }
     actions: [
         ActionItem {
-            title: qsTr("Reset image")
+            title: qsTr("Try again")
+            imageSource: "asset:///images/reset_flower_action_icon.png"
             onTriggered: {
                 lovesMeTab.resetFlower();
             }
@@ -29,7 +30,7 @@ Page {
             }
         }
         Button {
-            text: qsTr("One More Time")
+            text: qsTr("Try again")
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
             onClicked: {
@@ -75,6 +76,6 @@ Page {
             },
             MediaPlayer {
                 id: media
-        }
+            }
     ]
 }
