@@ -48,9 +48,16 @@ TabbedPane {
         }
         settingsAction: SettingsActionItem {
                             id: settingsAction
+                            property variant createdSheet: 0
+                            function onSheetClosed() {
+                                delete createdSheet;
+                                createdSheet = 0;
+                            }
+
                             onTriggered: {
-                                settingsSheet.updateSettings();
-                                settingsSheet.open();
+                                createdSheet = settingsSheetDef.createObject(parent);
+                                createdSheet.closed.connect(onSheetClosed);
+                                createdSheet.open();
                             }
                         }
         attachedObjects: [
@@ -79,10 +86,13 @@ TabbedPane {
                     } // Page
                 } // aboutSheet
             }, // ComponentDefinition
-            SettingsSheet {
-                id: settingsSheet
-                onClosed: {
-                    muteAction.updateSoundsAction();
+            ComponentDefinition {
+                id: settingsSheetDef
+                content: SettingsSheet {
+                    id: settingsSheet
+                    onClosed: {
+                        muteAction.updateSoundsAction();
+                    }
                 }
             },
             Settings {

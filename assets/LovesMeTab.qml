@@ -75,6 +75,6 @@ Page {
             },
             MediaPlayer {
                 id: media
-        }
+            }
     ]
 }

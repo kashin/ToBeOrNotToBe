@@ -4,12 +4,9 @@ import tb.ntb 1.0
 Sheet {
     id: settingsSheet
 
-    function updateSettings() {
-        muteButton.checked = applicationSettings.mute
-    }
-
     content: Page {
         titleBar: TitleBar {
+            branded: TriBool.False
             acceptAction: ActionItem {
                 title: qsTr("Ok")
                 onTriggered: {
