@@ -1,5 +1,6 @@
 x86*
-*.orig
+arm*
+*.orig*
 translations/*.ts
 assets/sounds/*
 assets/images/*

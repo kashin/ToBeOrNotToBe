@@ -3,24 +3,13 @@ import tb.ntb 1.0
 
 Page {
     id: askRandomPage
+    titleBar: TitleBar {
+                  branded: TriBool.False
+                  title: qsTr("Ask Probability Of The Event")
+              }
     Container {
         id: rootContainer
         layout: DockLayout {}
-        Container {
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment: VerticalAlignment.Top
-            Label {
-                text: qsTr("Ask Probability Of The Event")
-                multiline: true
-                horizontalAlignment: HorizontalAlignment.Center
-                textStyle {
-                    textAlign: TextAlign.Center
-                    base: SystemDefaults.TextStyles.TitleText
-                }
-            }
-            Divider {
-            }
-        }
         Container {
             id: probabilityContainer
             horizontalAlignment: HorizontalAlignment.Center
@@ -33,16 +22,6 @@ Page {
                     textAlign: TextAlign.Center
                     base: SystemDefaults.TextStyles.BigText
                 }
-                gestureHandlers: [
-                    TapHandler {
-                        onTapped: {
-                            outputLabel.textStyle.fontSize = FontSize.PointValue;
-                            outputLabel.textStyle.fontSizeValue = 40;
-                            var value = Math.ceil(Math.random() * 100);
-                            outputLabel.text = (value < 10 ? "0" : "") + value + "%";
-                        }
-                    }
-                ]
             }
             Label {
                 id: outputLabel
@@ -52,6 +31,16 @@ Page {
                 }
                 horizontalAlignment: HorizontalAlignment.Center
             }
+            gestureHandlers: [
+                TapHandler {
+                    onTapped: {
+                        outputLabel.textStyle.fontSize = FontSize.PointValue;
+                        outputLabel.textStyle.fontSizeValue = 40;
+                        var value = Math.ceil(Math.random() * 100);
+                        outputLabel.text = (value < 10 ? "0" : "") + value + "%";
+                    }
+                }
+            ]
         } // probabilityContainer
     } // rootContainer
 }
