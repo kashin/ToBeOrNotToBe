@@ -1,5 +1,4 @@
 import bb.cascades 1.0
-import bb.multimedia 1.0
 import tb.ntb 1.0
 
 Page {
@@ -51,15 +50,11 @@ Page {
             id: flower
             onLovesMeTextChanged: {
                 infoLabel.text = text;
-
-                if (!applicationSettings.mute) {
-                    if (applicationSettings.useDefaultFlowerVoice) {
-                        var source = applicationSettings.flowerVoiceDefault
-                               + (lovesMe ? "1.WAV": "2.WAV");
-                        media.setSourceUrl( source );
-                        media.play();
-                    }
-                }
+                var source = applicationSettings.flowerVoiceDefault
+                                + (lovesMe ? "1.WAV": "2.WAV");
+                player.muteSound = !applicationSettings.useDefaultFlowerVoice;
+                player.setSourceUrl( source );
+                player.playSound();
             }
         }
     }
@@ -70,8 +65,9 @@ Page {
             Settings {
                 id: applicationSettings
             },
-            MediaPlayer {
-                id: media
+            SoundPlayer {
+                id: player
+                muteSound: !applicationSettings.useDefaultFlowerVoice
             }
     ]
 }

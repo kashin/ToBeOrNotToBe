@@ -5,6 +5,7 @@
 #include <bb/cascades/AbstractPane>
 
 #include "Settings.h"
+#include "TBNTBMediaPlayer.h"
 
 using namespace bb::cascades;
 
@@ -13,6 +14,7 @@ App::App()
     QCoreApplication::setOrganizationName("MasterDon");
     QCoreApplication::setApplicationName("ToBeOrNotToBe");
     qmlRegisterType<Settings>("tb.ntb", 1, 0, "Settings");
+    qmlRegisterType<TBNTBMediaPlayer>("tb.ntb", 1, 0, "SoundPlayer");
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml");
 
