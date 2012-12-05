@@ -15,9 +15,6 @@ App::App()
     qmlRegisterType<Settings>("tb.ntb", 1, 0, "Settings");
 
     QmlDocument *qml = QmlDocument::create("asset:///main.qml");
-    //-- setContextProperty expose C++ object in QML as an variable
-    //-- uncomment next line to introduce 'this' object to QML name space as an 'app' variable
-    //qml->setContextProperty("app", this);
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     if (qml->hasErrors()) {
