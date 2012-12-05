@@ -53,16 +53,12 @@ Page {
                 infoLabel.text = text;
 
                 if (!applicationSettings.mute) {
-                    var source;
                     if (applicationSettings.useDefaultFlowerVoice) {
-                        source = applicationSettings.flowerVoiceDefault
+                        var source = applicationSettings.flowerVoiceDefault
                                + (lovesMe ? "1.WAV": "2.WAV");
-                    } else {
-                        source = applicationSettings.flowerVoice
-                               + (lovesMe ? "1.WAV": "2.WAV");
+                        media.setSourceUrl( source );
+                        media.play();
                     }
-                    media.setSourceUrl( source );
-                    media.play();
                 }
             }
         }
