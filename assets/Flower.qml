@@ -49,7 +49,8 @@ Container {
             }
             createdLeaf.initialTranslationY = yTranslation ;
 
-            createdLeaf.initialRotation = rotationAngle*i;
+            // initialRotation angle shouldn't be > 360
+            createdLeaf.initialRotation = (rotationAngle*i) % 360;
             i++;
         } // while
 
@@ -74,6 +75,7 @@ Container {
             var leafObject = flowerContainer.at(j);
             if (leafObject.objectName != leaf) {
                 leafObject.anotherLeafDragStarted = true;
+                leafObject.touchPropagationMode = TouchPropagationMode.PassThrough;
             }
         }
     }
@@ -83,6 +85,7 @@ Container {
             var leafObject = flowerContainer.at(j);
             if (leafObject.objectName != leaf) {
                 leafObject.anotherLeafDragStarted = false;
+                leafObject.touchPropagationMode = TouchPropagationMode.Full;
             }
         }
     }
@@ -104,6 +107,7 @@ Container {
             id: chamomileCenterComponent
             content: ImageView {
                     id: chamomileCenter
+                    touchPropagationMode: TouchPropagationMode.PassThrough
                     imageSource: "asset:///images/chamomile_center.png"
                     horizontalAlignment: HorizontalAlignment.Center
                     verticalAlignment: VerticalAlignment.Center
