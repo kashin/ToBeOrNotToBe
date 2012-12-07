@@ -1,5 +1,6 @@
 #include "app.hpp"
 #include "BallLogic.hpp"
+#include "CircularSlider.hpp"
 
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
@@ -21,6 +22,7 @@ App::App()
     //qml->setContextProperty("app", this);
 
     qmlRegisterType<BallLogic>("tb.ntb", 1, 0, "BallLogic");
+    qmlRegisterType<CircularSlider>("custom.lib", 1,0, "CircularSlider");
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     if (qml->hasErrors()) {
       qDebug() << qml->errors();

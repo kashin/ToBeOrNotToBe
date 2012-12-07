@@ -23,27 +23,13 @@ Page {
 	                    }
 	                //myObj.mySlot();
 	            }
-        }
-        attachedObjects: [
-            BallLogic {
-                id: ballLogic
-                value: 1
-                onValueChanged: {
-                    labelProgress.setText("olala222");
-                }
-            }
-        ]
-        /*PieChart {
-                     //id: aPieChart
-                     //anchors.centerIn: parent
-                     //width: 100; height: 100
-                     name: "A simple pie chart"
-                 }*/
+        }       
         Divider {
                     
                 }
         Button {
                     //text: myObj.someProperty
+                    text: "Moooove me..."
                     horizontalAlignment: HorizontalAlignment.Center
                     preferredWidth: 100
                     onClicked: 
@@ -71,9 +57,9 @@ Page {
                              labelProgress.setText("Progress complited"); 
                         }
                 }
-        /*Ball {
+        Ball {
             id: ball
-        }*/
+        }
         ProgressIndicator {
             id: progressIndicator
              

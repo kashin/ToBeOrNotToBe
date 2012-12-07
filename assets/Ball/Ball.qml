@@ -1,5 +1,6 @@
 import bb.cascades 1.0
-import BallLogic 1.0
+import tb.ntb 1.0
+import custom.lib 1.0
 
 Container {
     id: ballContainer
@@ -18,10 +19,10 @@ Container {
     
     
     onCreationCompleted: {
-        var ballAssCreated = ballAssComponent.createObject(parent)
+        /*var ballAssCreated = ballAssComponent.createObject(parent)
         add(ballAssCreated);
         ballAssCreated = ballFaceComponent.createObject(parent)
-        add(ballAssCreated);
+        add(ballAssCreated);*/
     }
     
     
@@ -30,6 +31,40 @@ Container {
     
     onCenterYChanged: {
     }
+    // Create the CircularSlider and lay it out
+            // just like any other control.
+            CircularSlider {
+                id: circularSlider
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                // Capture the valueChanged signal and update
+                // the label.
+                value: 1
+                onValueChanged: {
+                    console.log(value);
+                    label.text = value;
+                }
+            } // Ends the circular slider
+    Label {
+        id: label
+        text: "Olala"
+    }
+    Button {
+        id: button
+        text: "PUUUsh"
+        onClicked: {
+            circularSlider.value = 10;
+        }
+    }
+    attachedObjects: [
+            BallLogic {
+                 id: ballLogic
+                 value: 1
+                 onValueChanged: {
+                             
+                 }
+           }
+    ]
     /*attachedObjects: [
             ComponentDefinition {
                 id: ballAssComponent
