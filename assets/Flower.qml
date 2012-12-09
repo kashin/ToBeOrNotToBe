@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import tb.ntb 1.0
 
 Container {
     id: flowerContainer
@@ -14,7 +15,8 @@ Container {
         lovesMeText = qsTr("Loves Me");
         var rotationAngle = 17;
         // not less then 360/rotationAngle - 1 leafs should be on the screen to get 'full' flower (360 degrees) :)
-        var leafsCount = Math.ceil(Math.random() * 9) + (360/rotationAngle - 1);
+        var fullFlowerLeafsCount = 360/rotationAngle - 1;
+        var leafsCount = Math.ceil(Math.random() * (applicationSettings.leafsCount - fullFlowerLeafsCount)) + fullFlowerLeafsCount;
 
         var i = 0;
         var xMaximum = 170;
@@ -99,6 +101,9 @@ Container {
     preferredHeight: 768
 
     attachedObjects: [
+        Settings {
+            id: applicationSettings
+        },
         ComponentDefinition {
             id: leafComponent
             source: "Leaf.qml"

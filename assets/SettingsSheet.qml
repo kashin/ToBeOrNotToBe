@@ -30,6 +30,20 @@ Sheet {
                     }
                 }
             }
+            Label {
+                id: leafsCountLabel
+                text: qsTr("Maximum Leaf's Count: ") + leafCountSlider.value
+            }
+            Slider {
+                id: leafCountSlider
+                fromValue: 25
+                toValue: 75
+                value: applicationSettings.leafsCount
+                onValueChanged: {
+                    applicationSettings.leafsCount = value;
+                    leafsCountLabel = qsTr("Maximum Leaf's Count: ") + value;
+                }
+            }
             Divider {
             }
             CheckBox {
