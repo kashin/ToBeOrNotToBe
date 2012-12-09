@@ -4,8 +4,8 @@ import tb.ntb 1.0
 Page {
     id: lovesMeTab
     function resetFlower() {
-        infoLabel.text = qsTr("Loves Me Or Not?");
         flower.resetFlower();
+        infoLabel.text = qsTr("Loves Me Or Not?");
     }
     actions: [
         ActionItem {
@@ -49,7 +49,7 @@ Page {
         Flower {
             id: flower
             onLovesMeTextChanged: {
-                infoLabel.text = text;
+                infoLabel.text = flower.lovesMeText;
                 var source = applicationSettings.flowerVoiceDefault
                                 + (lovesMe ? "1.WAV": "2.WAV");
                 player.muteSound = !applicationSettings.useDefaultFlowerVoice;
