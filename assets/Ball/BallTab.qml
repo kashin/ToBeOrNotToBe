@@ -1,9 +1,13 @@
 import bb.cascades 1.0
 import tb.ntb 1.0
+import custom.lib 1.0
+//import custom.sensors 1.0
+//import QtMobility.sensors 1.2
 
 Page {
-    
-        signal btnClickSignal()
+
+                id: magicBall
+        //signal btnClickSignal()
         
     Container {
         Label {
@@ -13,18 +17,26 @@ Page {
         Divider {
             
         }
+        Ball{
+                    id: ballControl
+                }
         Button {
+            id: buttonReset
             text: "Reset"
             horizontalAlignment: HorizontalAlignment.Center
             preferredWidth: 10
 	           onClicked: {
-	                onClicked:{ 
-	                    btnClickSignal() 
-	                    }
+	               var i = 0;
+	               for(i = 0; i < 300000; i++){
+		               ballControl.coordinateX = i/1000;
+		               
+	           }
+	               //buttonReset.setText("dd");
+	               //console.log("dd");
 	                //myObj.mySlot();
 	            }
         }       
-        Divider {
+        /*Divider {
                     
                 }
         Button {
@@ -34,6 +46,7 @@ Page {
                     preferredWidth: 100
                     onClicked: 
                         {
+                             text: "OOOOOO"
                              ///start parameters
                              progressIndicator.setValue(progressIndicator.fromValue);                             
                              labelProgress.setText("Progress..."); 
@@ -46,10 +59,11 @@ Page {
                                  
                                  var val = (toValue / fillIndicator) * i;
                                  progressIndicator.setValue(val);
-                                 
+                                 ballControl.coordinateX = i;
                                  console.log("******compare values******");
                                  console.log(val);
                                  console.log(progressIndicator.value);
+                                 
                              }
                              
                              ///fin parameters
@@ -57,8 +71,8 @@ Page {
                              labelProgress.setText("Progress complited"); 
                         }
                 }
-        Ball {
-            id: ball
+        Ball{
+            id: ballControl
         }
         ProgressIndicator {
             id: progressIndicator
@@ -72,6 +86,16 @@ Page {
         Label {
                 id: labelProgress
                 text: "Progress..."
-        }
+        }*/
+        /*attachedObjects: [
+                    Compass {
+                        id: compass
+                        active: true
+                  
+                        onReadingChanged: {
+                            //labelProgress.text =  reading.azimuth;                    
+                        }
+                    }
+                ]*/
     }
 }

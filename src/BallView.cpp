@@ -1,20 +1,22 @@
 /*
- * CircularSlider.cpp
+ * BallView.cpp
  *
  *  Created on: 05.12.2012
  *      Author: golovinskaya.a
  */
-#include "CircularSlider.hpp"
+#include "BallView.hpp"
 
 #include <bb/cascades/AbsoluteLayout>
 #include <bb/cascades/AbsoluteLayoutProperties>
 #include <bb/cascades/DockLayout>
+#include <bb/cascades/OrientationSupport>
+
 #include <iostream>
 #include <math.h>
 
 #define PI 3.141592653589793
 
-CircularSlider::CircularSlider() {
+BallView::BallView() {
 	// In the constructor, we create a root container
 	//that uses an AbsoluteLayout and we create the circular
 	//image that serves as the slider track.
@@ -25,7 +27,7 @@ CircularSlider::CircularSlider() {
 
 	    // Create the slider track image.
 	    mTrackImage = ImageView::create().image(
-	            QUrl("asset:///images/slider_track.png"));
+	            QUrl("asset:///images/border.png"));
 
 	    // Create the handle container and two images, one for
 	    // active state and one for inactive.
@@ -39,24 +41,31 @@ CircularSlider::CircularSlider() {
 	                    .enabled(false);
 
 	    // Load the handle images
-	    mHandleOn = Image(QUrl("asset:///images/handle_pressed.png"));
-	    mHandleOff = Image(QUrl("asset:///images/handle_inactive.png"));
+	    //mHandleOn = Image(QUrl("asset:///images/handle_pressed.png"));
+	    //mHandleOff = Image(QUrl("asset:///images/handle_inactive.png"));
 
+	    mBallCenter = Image(QUrl("asset:///images/ballCenter.png"));
 	    // Create the image view for the handle using the image for
 	    // the inactive handle
-	    mHandle = ImageView::create().image(mHandleOff)
-	            .horizontal(HorizontalAlignment::Right)
-	            .vertical(VerticalAlignment::Center);
+	    //mHandle = ImageView::create().image(mHandleOff)
+	    //        .horizontal(HorizontalAlignment::Right)
+	    //        .vertical(VerticalAlignment::Center);
+
+	    mBallCenterView = ImageView::create().image(mBallCenter);
+	    	           // .horizontal(HorizontalAlignment::Center)
+	    	           // .vertical(VerticalAlignment::Center);
 
 	    // Finally, we add everything to the root container and set
 	    //the root control for the application.
 
 	    // Add the handle image to the to handle container
 	    // and add everything to the root container
-	    mHandleContainer->add(mHandle);
+
+	    //mHandleContainer->add(mHandle);
+	    mHandleContainer->add(mBallCenterView);
 	    mRootContainer->add(mTrackImage);
 	    mRootContainer->add(mHandleContainer);
-
+	    //mRootContainer->add(mBallCenterContainer);
 	    // Set the root of the custom control.
 	    setRoot(mRootContainer);
 
@@ -79,32 +88,81 @@ CircularSlider::CircularSlider() {
 	   setPreferredSize(mWidth, mHeight);
 }
 
-CircularSlider::~CircularSlider() {
+BallView::~BallView() {
 	// TODO Auto-generated destructor stub
 }
 
 // Get the value of the slider.
-float CircularSlider::value() const
+float BallView::value() const
 {
     return mValue;
 }
 
 // Set the value of the slider.
-void CircularSlider::setValue(float value)
+void BallView::setValue(float value)
 {
-   // if (mValue != value)
-   // {
+    if (mValue != value)
+    {
         mValue = value;
         emit valueChanged(mValue);
-   // }
+    }
 }
 
-void CircularSlider::onSizeChanged()
+float BallView::centerX()
+{
+	return mCenterX;
+}
+
+void BallView::setCenterX(float centerX)
+{
+	if (mCenterX != centerX)
+	{
+		mCenterX = centerX;
+		onCenterChanged();
+		emit centerXChanged(mCenterX);
+	}
+}
+
+float BallView::centerY()
+{
+	return mCenterY;
+}
+
+void BallView::setCenterY(float centerY)
+{
+	if (mCenterY != centerY)
+	{
+		mCenterY = centerY;
+		onCenterChanged();
+		emit centerYChanged(mCenterY);
+	}
+}
+
+void BallView::onCenterChanged()
+{
+	//Define if the point inside of the circle
+	int result = (((int)(mRelativeCenterX - mCenterX)^2) +
+			((int)(mRelativeCenterY - mCenterY)^2));
+	int sqrRadiusCircle = (((int)mRadiusCircle)^2);
+
+	if (result <= sqrRadiusCircle) //point inside of the circle
+	{
+		mHandleContainer->setTranslationX(mCenterX);
+	}
+	else//point outside of the circle
+	{
+		mHandleContainer->setTranslationY(mCenterY);
+	}
+}
+
+void BallView::onSizeChanged()
 {
     // Define the center of the circle.
     mCenterX = mWidth / 2;
     mCenterY = mHeight / 2;
     mRadiusCircle = mWidth - mCenterX;
+    mRelativeCenterX = mCenterX;
+    mRelativeCenterY = mCenterY;
 
     // Set the root container to the new size.
     mRootContainer->setPreferredSize(mWidth, mHeight);
@@ -113,13 +171,16 @@ void CircularSlider::onSizeChanged()
     mTrackImage->setPreferredSize(mWidth * 0.85, mHeight * 0.85);
 
     // Set the handle image and container to be much smaller.
-    mHandle->setPreferredSize(0.2 * mWidth, 0.2 * mHeight);
-    mHandleContainer->setPreferredSize(mWidth, 0.2 * mHeight);
+    //mHandle->setPreferredSize(0.2 * mWidth, 0.2 * mHeight);
+    //mHandleContainer->setPreferredSize(mWidth, 0.2 * mHeight);
+    mHandleContainer->setPreferredSize(mWidth, mHeight);
+    //mHandleContainer->setPreferredSize(mBallCenterView->preferredWidth(),
+    //		mBallCenterView->preferredHeight());
 
     // Transform the handle container along its y axis to move it
     // into the correct position.
     mHandleContainer->setTranslationY((mHeight - 0.2 * mHeight) / 2);
-
+    //mHandleContainer->setTranslation(mRelativeCenterX, mRelativeCenterY);
     // Transform the position of the track image to the correct
     // position.
     mTrackImage->setTranslation((mWidth - 0.85 * mWidth) / 2,
@@ -136,14 +197,14 @@ void CircularSlider::onSizeChanged()
     }
 }
 
-void CircularSlider::onSliderHandleTouched(TouchEvent* pTouchEvent)
+void BallView::onSliderHandleTouched(TouchEvent* pTouchEvent)
 {
     // Change to the active handle image if isDown()
     if (pTouchEvent->isDown()) {
-        mHandle->setImage(mHandleOn);
+        //mHandle->setImage(mHandleOn);
     // Change to the inactive handle image if isUp()
     } else if (pTouchEvent->isUp()) {
-        mHandle->setImage(mHandleOff);
+        //mHandle->setImage(mHandleOff);
     // Change the position of the slider handle if isMove()
     }
 
@@ -153,10 +214,10 @@ void CircularSlider::onSliderHandleTouched(TouchEvent* pTouchEvent)
     /*}*/
 }
 
-void CircularSlider::processRawCoordinates(float touchX, float touchY) {
+void BallView::processRawCoordinates(float touchX, float touchY) {
 
     // Determine the distance from the center to the touch point.
-    float distanceFromCenterToTouchPoint = sqrt(
+    /*float distanceFromCenterToTouchPoint = sqrt(
             (touchX - mCenterX) * (touchX - mCenterX)
                     + (touchY - mCenterY) * (touchY - mCenterY));
 
@@ -190,18 +251,19 @@ void CircularSlider::processRawCoordinates(float touchX, float touchY) {
     	            emit valueChanged(mAngle);
     	            mrevAngle = mAngle;
     	        }
-    	    }
+    	    }*/
     	}
 
-void CircularSlider::onWidthChanged(float width)
+void BallView::onWidthChanged(float width)
 {
 	mWidth = width;
 	onSizeChanged();
 }
 
-void CircularSlider::onHeightChanged(float height)
+void BallView::onHeightChanged(float height)
 {
 	mHeight = height;
 	onSizeChanged();
 }
+
 

@@ -7,16 +7,13 @@ Container {
     
     layout: DockLayout {
             }
-    property int ballWidth: 526
-    property int ballHeight: 464
-    property int centerX: 0
-    property int centerY: 0
+    property int coordinateX: 0
+    property int coordinateY: 0
 
     horizontalAlignment: HorizontalAlignment.Center
-    verticalAlignment: VerticalAlignment.Center
-    preferredHeight: ballContainer.ballHeight
-    preferredWidth: ballContainer.ballWidth 
-    
+    verticalAlignment: VerticalAlignment.Center 
+    preferredHeight: 600
+    preferredWidth: 600
     
     onCreationCompleted: {
         /*var ballAssCreated = ballAssComponent.createObject(parent)
@@ -26,15 +23,17 @@ Container {
     }
     
     
-    onCenterXChanged: {
+    onCoordinateXChanged: {
+        ball.centerX = ballContainer.coordinateX;
     }
     
-    onCenterYChanged: {
+    onCoordinateYChanged: {
+        ball.centerX = ballContainer.coordinateX;
     }
     // Create the CircularSlider and lay it out
             // just like any other control.
-            CircularSlider {
-                id: circularSlider
+            BallView {
+                id: ball
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
                 // Capture the valueChanged signal and update
@@ -42,10 +41,14 @@ Container {
                 value: 1
                 onValueChanged: {
                     console.log(value);
-                    label.text = value;
+                    //label.text = value;
+                }
+                onCenterXChanged: {
+                }
+                onCenterYChanged: {
                 }
             } // Ends the circular slider
-    Label {
+    /*Label {
         id: label
         text: "Olala"
     }
@@ -55,8 +58,8 @@ Container {
         onClicked: {
             circularSlider.value = 10;
         }
-    }
-    attachedObjects: [
+    }*/
+    /*attachedObjects: [
             BallLogic {
                  id: ballLogic
                  value: 1
@@ -64,7 +67,7 @@ Container {
                              
                  }
            }
-    ]
+    ]*/
     /*attachedObjects: [
             ComponentDefinition {
                 id: ballAssComponent

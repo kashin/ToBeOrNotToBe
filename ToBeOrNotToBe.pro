@@ -3,10 +3,15 @@ TARGET = ToBeOrNotToBe
 
 CONFIG += qt warn_on debug_and_release cascades
 
+MOBILITY += sensors
+
 INCLUDEPATH += ../src
 SOURCES += ../src/*.cpp
 HEADERS += ../src/*.hpp ../src/*.h
+
 LIBS += -lbbmultimedia
+LIBS += -lbbdevice
+LIBS += -lcamapi
 
 lupdate_inclusion {
     SOURCES += ../assets/*.qml
