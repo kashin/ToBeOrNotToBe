@@ -15,6 +15,8 @@ LIBS += -lcamapi
 
 lupdate_inclusion {
     SOURCES += ../assets/*.qml
+    SOURCES += ../assets/Ball/*.qml
+    SOURCES += ../assets/AskRandom/*.qml
 }
 
 device {
@@ -42,8 +44,5 @@ UI_DIR = $${DESTDIR}/.ui
 
 TRANSLATIONS = \
     $${TARGET}_en_GB.ts \
-    $${TARGET}_fr.ts \
-    $${TARGET}_it.ts \    
-    $${TARGET}_de.ts \
-    $${TARGET}_es.ts \
+    $${TARGET}_ru.ts \
     $${TARGET}.ts

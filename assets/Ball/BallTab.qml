@@ -11,7 +11,7 @@ Page {
         
     Container {
         Label {
-            text: "Ask me..."
+            text: qsTr("Ask me...")
             horizontalAlignment: HorizontalAlignment.Center
         }
         Divider {
@@ -22,7 +22,7 @@ Page {
                 }
         Button {
             id: buttonReset
-            text: "Reset"
+            text: qsTr("Reset")
             horizontalAlignment: HorizontalAlignment.Center
             preferredWidth: 10
 	           onClicked: {
