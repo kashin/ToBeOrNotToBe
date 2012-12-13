@@ -84,8 +84,12 @@ ImageView {
             if (countBeforeRemoveInitialRotation >= 0) {
                 countBeforeRemoveInitialRotation--
                 if (countBeforeRemoveInitialRotation == 0) {
-                    // FIXME: we need to update this value, because rigth we have an unnecessary rotation (from initialRotation angle to 0)
-                    initialRotation = 0;
+                    // FIXME: do we need this stupid 'if else' logic?
+                    if ( initialRotation >= 270 && initialRotation < 360) {
+                        initialRotation = 360;
+                    } else {
+                        initialRotation = 0;
+                    }
                 }
             }
             previousCurrentY = currentY

@@ -17,7 +17,7 @@ Sheet {
 
         Container {
             Label {
-                text: qsTr("Flower's sample voice")
+                text: qsTr("Use Flower's Sample Voice")
             }
             ToggleButton {
                 id: flowerVoiceToggle
@@ -26,23 +26,23 @@ Sheet {
                     if (checked) {
                          applicationSettings.useDefaultFlowerVoice = true;
                     } else {
-                        if (flowerVoicesDropDown.selectedValue) {
-                            applicationSettings.useDefaultFlowerVoice = false;
-                            applicationSettings.flowerVoice = flowerVoicesDropDown.selectedValue;
-                        }
+                        applicationSettings.useDefaultFlowerVoice = false;
                     }
                 }
             }
-            DropDown {
-                id: flowerVoicesDropDown
-                title: "disabled for now"
-                visible: !flowerVoiceToggle.checked
-                options: [
-                    Option {
-                        value: "not supported"
-                        text: "not supported"
-                    }
-                ]
+            Label {
+                id: leafsCountLabel
+                text: qsTr("Maximum Leaf's Count: ") + leafCountSlider.value
+            }
+            Slider {
+                id: leafCountSlider
+                fromValue: 25
+                toValue: 75
+                value: applicationSettings.leafsCount
+                onValueChanged: {
+                    applicationSettings.leafsCount = value;
+                    leafsCountLabel = qsTr("Maximum Leaf's Count: ") + value;
+                }
             }
             Divider {
             }

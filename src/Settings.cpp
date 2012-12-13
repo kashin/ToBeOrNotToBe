@@ -59,4 +59,16 @@ QString Settings::flowerVoice()
     return value("flowerVoice", "").toString();
 }
 
+int Settings::leafsCount()
+{
+	return value("leafsCount", 25).toInt();
+}
+
+void Settings::setLeafsCount(int newLeafsCount)
+{
+	if (newLeafsCount != leafsCount()) {
+		setValue("leafsCount", newLeafsCount);
+		emit leafsCountChanged(newLeafsCount);
+	}
+}
 

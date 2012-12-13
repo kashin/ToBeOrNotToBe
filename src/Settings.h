@@ -33,6 +33,11 @@ public:
 	 */
 	Q_PROPERTY( QString flowerVoice READ flowerVoice WRITE setFlowerVoice NOTIFY flowerVoiceChanged )
 
+	/**
+	 *  Contains maximum leaf's count.
+	 */
+	Q_PROPERTY( int leafsCount READ leafsCount WRITE setLeafsCount NOTIFY leafsCountChanged )
+
 public:
 	Settings(QObject * parent = 0);
 
@@ -51,10 +56,14 @@ public slots:
 	void setFlowerVoice(const QString& newFlowerVoice);
 	QString flowerVoice();
 
+	int leafsCount();
+	void setLeafsCount(int newLeafsCount);
+
 signals:
     void muteChanged(bool newMute);
     void useDefaultFlowerVoiceChanged(bool newUseDefaultFlowerVoice);
     void flowerVoiceChanged(QString newflowerVoice);
+    void leafsCountChanged(int newLeafsCount);
 };
 
 #endif // TOBEORNOTTOBE_SETTINGS

@@ -1,6 +1,7 @@
 x86*
 arm*
 *.orig*
+.cproject
 translations/*.ts
 assets/sounds/*
 assets/images/*

@@ -36,7 +36,7 @@ Page {
                     onTapped: {
                         outputLabel.textStyle.fontSize = FontSize.PointValue;
                         outputLabel.textStyle.fontSizeValue = 40;
-                        var value = Math.ceil(Math.random() * 100);
+                        var value = Math.ceil(Math.random() * 99);
                         outputLabel.text = (value < 10 ? "0" : "") + value + "%";
                     }
                 }
