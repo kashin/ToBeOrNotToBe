@@ -6,9 +6,9 @@ Sheet {
 
     content: Page {
         titleBar: TitleBar {
-            //branded: TriBool.False
+            branded: TriBool.False
             acceptAction: ActionItem {
-                title: qsTr("Ok")
+                title: qsTr("Close")
                 onTriggered: {
                     settingsSheet.close();
                 }
@@ -18,6 +18,7 @@ Sheet {
         Container {
             Label {
                 text: qsTr("Use Flower's Sample Voice")
+                multiline: true
             }
             ToggleButton {
                 id: flowerVoiceToggle
@@ -33,6 +34,7 @@ Sheet {
             Label {
                 id: leafsCountLabel
                 text: qsTr("Maximum Leaf's Count: ") + leafCountSlider.value
+                multiline: true
             }
             Slider {
                 id: leafCountSlider

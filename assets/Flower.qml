@@ -151,9 +151,7 @@ Container {
 
     onControlRemoved: {
         // adding some 'bonus leafs' if lovesMe == false, let's give users another chance :)
-        console.log("onControlRemoved:" + flowerContainer.count());
         if (flowerContainer.count() == 1 && flowerContainer.bonusRound && !flowerContainer.lovesMe) {
-            console.log("onControlRemoved2:");
             moreLeafsSheet.open()
             flowerContainer.bonusRound = false;
         }
