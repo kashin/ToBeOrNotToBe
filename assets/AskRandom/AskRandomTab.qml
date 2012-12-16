@@ -4,7 +4,7 @@ import tb.ntb 1.0
 Page {
     id: askRandomPage
     titleBar: TitleBar {
-                  branded: TriBool.False
+                  appearance: TitleBarAppearance.Plain
                   title: qsTr("Ask Probability Of The Event")
               }
     Container {
