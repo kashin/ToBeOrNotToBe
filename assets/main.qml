@@ -61,8 +61,7 @@ TabbedPane {
                             }
                         }
         attachedObjects: [
-            // FIXME: Workaround for "application can't handle 'exit' signal"
-            // Adds a different problem with couple of "ERROR: Context: Object name=" <ObjectName> " [objectId= <id> ] not unrealized" errors
+            // Workaround for http://supportforums.blackberry.com/t5/Cascades-Development/Beta-4-Application-Menu-Issue/td-p/2010717
             ComponentDefinition {
                 id: aboutSheetDef
                 content: Sheet {
