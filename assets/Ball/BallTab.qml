@@ -19,20 +19,36 @@ Page {
         }
                 
         ImageView {
-		    id: imageView
-			imageSource: "asset:///images/1.gif"
-			horizontalAlignment: HorizontalAlignment.Center
-			verticalAlignment: VerticalAlignment.Center
-			preferredHeight: 600
-			preferredWidth: 600
-		  }
-		/*attachedObjects: [
-		  				ImageAnimator {
-		  				        id: imageAnimator
-		  				        animatedImage: imageView.image
-		  				        started: true
-		  				      }
-		  				    ]*/
+            id: ballView
+            imageSource: "asset:///images/1.gif"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            preferredHeight: 600
+            preferredWidth: 600
+            attachedObjects: [
+                ImageAnimator {
+                    id: ballAnimator
+                    animatedImage: ballView.image
+                    started: false
+                }
+            ]
+            gestureHandlers: [
+                TapHandler {
+                    onTapped: {
+                        if (ballAnimator.playing) {
+                            ballAnimator.stopAt(1,2);
+                        } else {
+                            // start of stupid hack. Otherwise, for some reason animation is not started
+                            var source = ballView.imageSource
+                            ballView.imageSource = ""
+                            ballView.imageSource = source
+                            // end of stupid hack
+                            ballAnimator.start()
+                        }
+                    }
+                }
+            ]
+        }
          Divider {
                     
                 }
