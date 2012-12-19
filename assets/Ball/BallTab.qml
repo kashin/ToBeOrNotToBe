@@ -17,18 +17,32 @@ Page {
         Divider {
             
         }
-        Ball{
-                    id: ballControl
+                
+        ImageView {
+		    id: imageView
+			imageSource: "asset:///images/1.gif"
+			horizontalAlignment: HorizontalAlignment.Center
+			verticalAlignment: VerticalAlignment.Center
+			preferredHeight: 600
+			preferredWidth: 600
+		  }
+		/*attachedObjects: [
+		  				ImageAnimator {
+		  				        id: imageAnimator
+		  				        animatedImage: imageView.image
+		  				        started: true
+		  				      }
+		  				    ]*/
+         Divider {
+                    
                 }
-        Button {
+         Button {
             id: buttonReset
             text: "Reset"
             horizontalAlignment: HorizontalAlignment.Center
             preferredWidth: 10
 	           onClicked: {
-	               var i = 0;
-	               for(i = 0; i < 300000; i++){
-		               ballControl.coordinateX = i/1000;
+	               
 		               
 	           }
 	               //buttonReset.setText("dd");
@@ -98,4 +112,4 @@ Page {
                     }
                 ]*/
     }
-}
+
