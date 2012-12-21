@@ -6,7 +6,7 @@ Sheet {
 
     content: Page {
         titleBar: TitleBar {
-            //branded: TriBool.False
+            appearance: TitleBarAppearance.Plain
             acceptAction: ActionItem {
                 title: qsTr("Ok")
                 onTriggered: {
