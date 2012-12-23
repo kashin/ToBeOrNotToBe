@@ -10,6 +10,7 @@ Page {
     Container {
         id: rootContainer
         layout: DockLayout {}
+        background: backgroundDef.imagePaint
         Container {
             id: probabilityContainer
             horizontalAlignment: HorizontalAlignment.Center
@@ -39,6 +40,12 @@ Page {
                         var value = Math.ceil(Math.random() * 99);
                         outputLabel.text = (value < 10 ? "0" : "") + value + "%";
                     }
+                }
+            ]
+            attachedObjects: [
+                ImagePaintDefinition {
+                    id: backgroundDef
+                    imageSource: "asset:///images/probability_background.png"
                 }
             ]
         } // probabilityContainer

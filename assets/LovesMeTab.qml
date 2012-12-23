@@ -3,6 +3,10 @@ import tb.ntb 1.0
 
 Page {
     id: lovesMeTab
+    titleBar: TitleBar {
+                  appearance: TitleBarAppearance.Plain
+                  title: qsTr("Loves Me Or Not")
+              }
     function resetFlower() {
         flower.resetFlower();
         infoLabel.text = qsTr("Loves Me Or Not?");
@@ -20,13 +24,6 @@ Page {
     Container {
         touchPropagationMode: TouchPropagationMode.Full
         layout: StackLayout {
-        }
-        Label {
-            horizontalAlignment: HorizontalAlignment.Center
-            text: qsTr("Loves Me Or Not")
-            textStyle {
-                base: SystemDefaults.TextStyles.TitleText
-            }
         }
         Button {
             text: qsTr("Try again")
