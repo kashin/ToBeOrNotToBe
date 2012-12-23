@@ -140,7 +140,6 @@ TabbedPane {
         imageSource: "asset:///images/ask_me_icon.png"
         onTriggered: {
             if (content == undefined) {
-                console.log("new content for the tab");
                 var createdTab = askRandomTabDef.createObject(parent);
                 content = createdTab;
             }
