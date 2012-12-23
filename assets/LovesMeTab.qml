@@ -10,7 +10,7 @@ Page {
     actions: [
         ActionItem {
             title: qsTr("Try again")
-            imageSource: "asset:///images/reset_flower_action_icon.png"
+            imageSource: "asset:///images/flower_icon.png"
             onTriggered: {
                 lovesMeTab.resetFlower();
             }

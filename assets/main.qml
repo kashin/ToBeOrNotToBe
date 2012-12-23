@@ -105,9 +105,17 @@ TabbedPane {
     Tab {
         id: flowerTab
         title: qsTr("Loves Me Or Not")
+        image: flowerIcon.image
         LovesMeTab {
             id: lovesMeTab
         }
+        attachedObjects: [
+            ImagePaintDefinition {
+                id: flowerIcon
+                repeatPattern: RepeatPattern.Fill
+                imageSource: "asset:///images/flower_icon.png"
+            }
+        ]
     }
     Tab {
         id: ballTab
@@ -118,6 +126,7 @@ TabbedPane {
             }
         ]
         title: qsTr("Magic ball")
+        imageSource: "asset:///images/ball_icon.png"
         onTriggered: {
             if (content == undefined) {
                 var ballPageCreated = ballTabDef.createObject(parent);
@@ -128,6 +137,7 @@ TabbedPane {
     Tab {
         id: askRandomTab
         title: qsTr("Ask Random")
+        imageSource: "asset:///images/ask_me_icon.png"
         onTriggered: {
             if (content == undefined) {
                 console.log("new content for the tab");

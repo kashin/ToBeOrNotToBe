@@ -24,7 +24,7 @@ ImageView {
     }
     
     function stopAnimation() {
-        ballAnimator.stopAt(1,2)
+        ballAnimator.stopAt(3,2)
         ignoreTaps = true
     }
 
@@ -47,7 +47,6 @@ ImageView {
                     } else if ( ballView.imageSource == secondAsset ) {
                         ballView.showText()
                         ignoreTaps = true
-                        ballView.imageSource = thirdAsset
                     } else if( ballView.imageSource == thirdAsset ) {
                         ballView.imageSource = firstAsset
                         startAnimation()

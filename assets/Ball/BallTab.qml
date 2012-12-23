@@ -81,6 +81,7 @@ Page {
                 if (opacity == 0) {
                     ball.isShowingText = false
                     ball.ignoreTaps = false
+                    ball.imageSource = ball.thirdAsset
                     ball.startAnimation()
                 }
             }
