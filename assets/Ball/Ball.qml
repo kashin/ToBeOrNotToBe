@@ -40,7 +40,6 @@ ImageView {
             property bool isInitialized: false
             animatedImage: ballView.image
             onRunningChanged: {
-                console.log("onRunningChanged: " + ballView.imageSource);
                 if(!running && isInitialized) {
                     if ( ballView.imageSource == firstAsset ) {
                         ballView.imageSource = secondAsset
@@ -70,7 +69,6 @@ ImageView {
                     ignoreTaps = true
                     return;
                 }
-                console.log("onTapped:" + ballAnimator.running);
                 if (ballAnimator.running) {
                     stopAnimation()
                 } else {
