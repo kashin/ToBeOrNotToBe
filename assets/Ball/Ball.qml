@@ -1,95 +1,68 @@
 import bb.cascades 1.0
-import tb.ntb 1.0
-import custom.lib 1.0
 
-Container {
-    id: ballContainer
+ImageView {
+    id: ballView
+
+    property bool isShowingText: false
+    property bool ignoreTaps: false
+
+    signal showText()
+    signal hideText()
     
-    layout: DockLayout {
-            }
-    property int coordinateX: 0
-    property int coordinateY: 0
+    function startAnimation() {
+        // start of stupid hack. Otherwise, for some reason animation is not started
+        var source = ballView.imageSource
+        ballView.imageSource = ""
+        ballView.imageSource = source
+        // end of stupid hack
+        ballAnimator.start()
+        ignoreTaps = false
+    }
+    
+    function stopAnimation() {
+        ballAnimator.stopAt(1,2)
+        ignoreTaps = true
+    }
 
+    imageSource: "asset:///images/1.gif"
     horizontalAlignment: HorizontalAlignment.Center
-    verticalAlignment: VerticalAlignment.Center 
-    preferredHeight: 600
-    preferredWidth: 600
-    
-    onCreationCompleted: {
-        /*var ballAssCreated = ballAssComponent.createObject(parent)
-        add(ballAssCreated);
-        ballAssCreated = ballFaceComponent.createObject(parent)
-        add(ballAssCreated);*/
-    }
-    
-    
-    onCoordinateXChanged: {
-        ball.centerX = ballContainer.coordinateX;
-    }
-    
-    onCoordinateYChanged: {
-        ball.centerX = ballContainer.coordinateX;
-    }
-    // Create the CircularSlider and lay it out
-            // just like any other control.
-            BallView {
-                id: ball
-                horizontalAlignment: HorizontalAlignment.Center
-                verticalAlignment: VerticalAlignment.Center
-                // Capture the valueChanged signal and update
-                // the label.
-                value: 1
-                onValueChanged: {
-                    console.log(value);
-                    //label.text = value;
+    verticalAlignment: VerticalAlignment.Center
+    preferredHeight: 700
+    preferredWidth: 700
+
+    attachedObjects: [
+        ImageAnimator {
+            id: ballAnimator
+            property bool isInitialized: false
+            animatedImage: ballView.image
+            onRunningChanged: {
+                if(!running && isInitialized) {
+                    ballView.showText()
+                    ignoreTaps = true
                 }
-                onCenterXChanged: {
-                }
-                onCenterYChanged: {
-                }
-            } // Ends the circular slider
-    /*Label {
-        id: label
-        text: "Olala"
-    }
-    Button {
-        id: button
-        text: "PUUUsh"
-        onClicked: {
-            circularSlider.value = 10;
-        }
-    }*/
-    /*attachedObjects: [
-            BallLogic {
-                 id: ballLogic
-                 value: 1
-                 onValueChanged: {
-                             
-                 }
-           }
-    ]*/
-    /*attachedObjects: [
-            ComponentDefinition {
-                id: ballAssComponent
-                content: ImageView {
-                        id: ballAss
-                        imageSource: "asset:///images/ball_ass2.png"
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
-                        scalingMethod: ScalingMethod.Fill
-                        opacity: 0
-                    }
-            },
-            ComponentDefinition {
-                id: ballFaceComponent
-                content: ImageView {
-                        id: ballFace
-                        imageSource: "asset:///images/ball_face2.png"
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
-                        scalingMethod: ScalingMethod.Fill
-                        opacity: 1
-                    }
             }
-    ]*/
-}
+        }
+    ]
+    gestureHandlers: [
+        TapHandler {
+            onTapped: {
+                if(ballView.ignoreTaps) {
+                    return;
+                }
+                if (isShowingText) {
+                    ballView.hideText()
+                    ignoreTaps = true
+                    return;
+                }
+                if (ballAnimator.playing) {
+                    stopAnimation()
+                } else {
+                    startAnimation()
+                }
+            }
+        }
+    ]
+    onCreationCompleted: {
+        ballAnimator.isInitialized = true
+    }
+} // ImageView

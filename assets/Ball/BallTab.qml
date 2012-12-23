@@ -1,131 +1,137 @@
 import bb.cascades 1.0
 import tb.ntb 1.0
-import custom.lib 1.0
-//import custom.sensors 1.0
-//import QtMobility.sensors 1.2
 
 Page {
 
-                id: magicBall
-        //signal btnClickSignal()
-        
+    titleBar: TitleBar {
+        appearance: TitleBarAppearance.Plain
+        title: qsTr("Ask me...")
+    }
+    id: magicBall
+
     Container {
+        id: ballContainer
+        background: Color.DarkBlue
+        layout: DockLayout {}
+
+        function updateAnswerText() {
+        }
+
+        function fadeInAnwser() {
+            updateAnswerText();
+            firstLabelFadeAnim.fromOpacity = 0
+            firstLabelFadeAnim.toOpacity = 1
+            firstLabelFadeAnim.duration = 300
+            secondLabelFadeAnim.fromOpacity = 0
+            secondLabelFadeAnim.toOpacity = 1
+            secondLabelFadeAnim.duration = 500
+            thirdLabelFadeAnim.fromOpacity = 0
+            thirdLabelFadeAnim.toOpacity = 1
+            thirdLabelFadeAnim.duration = 700
+            firstLabelFadeAnim.play()
+            secondLabelFadeAnim.play()
+            thirdLabelFadeAnim.play()
+        }
+
+        function fadeOutAnwser() {
+            firstLabelFadeAnim.fromOpacity = 1
+            firstLabelFadeAnim.toOpacity = 0
+            firstLabelFadeAnim.duration = 700
+            secondLabelFadeAnim.fromOpacity = 1
+            secondLabelFadeAnim.toOpacity = 0
+            secondLabelFadeAnim.duration = 500
+            thirdLabelFadeAnim.fromOpacity = 1
+            thirdLabelFadeAnim.toOpacity = 0
+            thirdLabelFadeAnim.duration = 300
+            firstLabelFadeAnim.play()
+            secondLabelFadeAnim.play()
+            thirdLabelFadeAnim.play()
+        }
+
+        Ball {
+            id: ball
+            onShowText: {
+                ballContainer.fadeInAnwser()
+            }
+            onHideText: {
+                ballContainer.fadeOutAnwser()
+            }
+        }
         Label {
-            text: "Ask me..."
-            horizontalAlignment: HorizontalAlignment.Center
-        }
-        Divider {
-            
-        }
-                
-        ImageView {
-            id: ballView
-            imageSource: "asset:///images/1.gif"
+            id: firstLabel
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            preferredHeight: 600
-            preferredWidth: 600
-            attachedObjects: [
-                ImageAnimator {
-                    id: ballAnimator
-                    animatedImage: ballView.image
-                    started: false
+            text: qsTr("some long")
+            textStyle {
+                textAlign: TextAlign.Center
+            }
+            preferredWidth: 130
+            preferredHeight: 70
+            translationY: -70
+            opacity: 0
+            animations: [
+                FadeTransition {
+                    id: firstLabelFadeAnim
+                    fromOpacity: 0
+                    toOpacity: 1
+                    duration: 300
                 }
             ]
-            gestureHandlers: [
-                TapHandler {
-                    onTapped: {
-                        if (ballAnimator.playing) {
-                            ballAnimator.stopAt(1,2);
-                        } else {
-                            // start of stupid hack. Otherwise, for some reason animation is not started
-                            var source = ballView.imageSource
-                            ballView.imageSource = ""
-                            ballView.imageSource = source
-                            // end of stupid hack
-                            ballAnimator.start()
-                        }
-                    }
+            onOpacityChanged: {
+                if (opacity == 0) {
+                    ball.isShowingText = false
+                    ball.ignoreTaps = false
+                    ball.startAnimation()
                 }
-            ]
-        }
-         Divider {
-                    
-                }
-         Button {
-            id: buttonReset
-            text: "Reset"
-            horizontalAlignment: HorizontalAlignment.Center
-            preferredWidth: 10
-	           onClicked: {
-	               
-		               
-	           }
-	               //buttonReset.setText("dd");
-	               //console.log("dd");
-	                //myObj.mySlot();
-	            }
-        }       
-        /*Divider {
-                    
-                }
-        Button {
-                    //text: myObj.someProperty
-                    text: "Moooove me..."
-                    horizontalAlignment: HorizontalAlignment.Center
-                    preferredWidth: 100
-                    onClicked: 
-                        {
-                             text: "OOOOOO"
-                             ///start parameters
-                             progressIndicator.setValue(progressIndicator.fromValue);                             
-                             labelProgress.setText("Progress..."); 
-                             
-                             var i = 0;
-                             var fillIndicator = 20;
-                             var toValue = progressIndicator.toValue;
-                             
-                             for(i = 0; i < fillIndicator; i++){
-                                 
-                                 var val = (toValue / fillIndicator) * i;
-                                 progressIndicator.setValue(val);
-                                 ballControl.coordinateX = i;
-                                 console.log("******compare values******");
-                                 console.log(val);
-                                 console.log(progressIndicator.value);
-                                 
-                             }
-                             
-                             ///fin parameters
-                             progressIndicator.setValue(progressIndicator.toValue);
-                             labelProgress.setText("Progress complited"); 
-                        }
-                }
-        Ball{
-            id: ballControl
-        }
-        ProgressIndicator {
-            id: progressIndicator
-             
-            horizontalAlignment: HorizontalAlignment.Center         
-            fromValue: 0
-            toValue: 100
-            value: 0  
-                    
+            }
         }
         Label {
-                id: labelProgress
-                text: "Progress..."
-        }*/
-        /*attachedObjects: [
-                    Compass {
-                        id: compass
-                        active: true
-                  
-                        onReadingChanged: {
-                            //labelProgress.text =  reading.azimuth;                    
-                        }
-                    }
-                ]*/
+            id: secondLabel
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            text: qsTr("text")
+            textStyle {
+                textAlign: TextAlign.Center
+            }
+            preferredWidth: 130
+            preferredHeight: 70
+            opacity: 0
+            animations: [
+                FadeTransition {
+                    id: secondLabelFadeAnim
+                    fromOpacity: 0
+                    toOpacity: 1
+                    duration: 500
+                }
+            ]
+        }
+        Label {
+            id: thirdLabel
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            text: qsTr("is here")
+            preferredWidth: 130
+            preferredHeight: 70
+            textStyle {
+                textAlign: TextAlign.Center
+            }
+            translationY: 70
+            opacity: 0
+            animations: [
+                FadeTransition {
+                    id: thirdLabelFadeAnim
+                    fromOpacity: 0
+                    toOpacity: 1
+                    duration: 700
+                }
+            ]
+            onOpacityChanged: {
+                if (opacity == 1) {
+                    ball.isShowingText = true
+                    ball.ignoreTaps = false
+                }
+            }
+        }// Label
     }
+}
 
