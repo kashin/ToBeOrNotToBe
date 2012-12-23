@@ -6,15 +6,19 @@ ImageView {
     property bool isShowingText: false
     property bool ignoreTaps: false
 
+    property string firstAsset: "asset:///images/ball1.gif"
+    property string secondAsset: "asset:///images/ball2.gif"
+    property string thirdAsset: "asset:///images/ball3.gif"
+
     signal showText()
     signal hideText()
     
     function startAnimation() {
-        // start of stupid hack. Otherwise, for some reason animation is not started
-        var source = ballView.imageSource
-        ballView.imageSource = ""
-        ballView.imageSource = source
-        // end of stupid hack
+        // start of stupid hack
+        var source = imageSource
+        imageSource = ""
+        imageSource = source
+        //end of stupid hack
         ballAnimator.start()
         ignoreTaps = false
     }
@@ -24,7 +28,7 @@ ImageView {
         ignoreTaps = true
     }
 
-    imageSource: "asset:///images/1.gif"
+    imageSource: firstAsset
     horizontalAlignment: HorizontalAlignment.Center
     verticalAlignment: VerticalAlignment.Center
     preferredHeight: 700
@@ -36,9 +40,21 @@ ImageView {
             property bool isInitialized: false
             animatedImage: ballView.image
             onRunningChanged: {
+                console.log("onRunningChanged: " + ballView.imageSource);
                 if(!running && isInitialized) {
-                    ballView.showText()
-                    ignoreTaps = true
+                    if ( ballView.imageSource == firstAsset ) {
+                        ballView.imageSource = secondAsset
+                        startAnimation()
+                    } else if ( ballView.imageSource == secondAsset ) {
+                        ballView.showText()
+                        ignoreTaps = true
+                        ballView.imageSource = thirdAsset
+                    } else if( ballView.imageSource == thirdAsset ) {
+                        ballView.imageSource = firstAsset
+                        startAnimation()
+                    }
+                } else if(running && ( ballView.imageSource == secondAsset  || ballView.imageSource == thirdAsset )) {
+                    stopAnimation()
                 }
             }
         }
@@ -54,7 +70,8 @@ ImageView {
                     ignoreTaps = true
                     return;
                 }
-                if (ballAnimator.playing) {
+                console.log("onTapped:" + ballAnimator.running);
+                if (ballAnimator.running) {
                     stopAnimation()
                 } else {
                     startAnimation()
