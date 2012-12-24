@@ -1,11 +1,9 @@
 #include "app.hpp"
-#include "PieChart.h"
 
 #include <stdio.h>
 #include <QLocale>
 #include <QTranslator>
 #include <bb/cascades/Application>
-#include "BallLogic.hpp"
 
 using ::bb::cascades::Application;
 
