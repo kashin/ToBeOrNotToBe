@@ -15,6 +15,8 @@ public:
      */
     Q_PROPERTY( bool muteSound READ muteSound WRITE setMuteSound NOTIFY muteSoundChanged )
 
+    Q_PROPERTY( int repeatSoundMode READ repeatSoundMode WRITE setRepeatSoundMode NOTIFY repeatModeSoundChanged )
+
     explicit TBNTBMediaPlayer(QObject * parent = 0);
     virtual ~TBNTBMediaPlayer();
 
@@ -22,11 +24,16 @@ public:
 
     Q_INVOKABLE bool muteSound();
 
+    Q_INVOKABLE int repeatSoundMode();
+
 public slots:
     void setMuteSound(bool newMuteSound);
 
+    void setRepeatSoundMode(int newRepeatSoundMode);
+
 signals:
     void muteSoundChanged(bool newMuteSound);
+    void repeatModeSoundChanged(int newRepeatSoundMode);
 
 private:
     bool mMuteSound;

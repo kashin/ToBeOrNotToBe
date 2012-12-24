@@ -165,7 +165,7 @@ Page {
             id: firstLabel
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            text: qsTr("some long")
+            touchPropagationMode: TouchPropagationMode.PassThrough
             textStyle {
                 textAlign: TextAlign.Center
             }
@@ -194,7 +194,7 @@ Page {
             id: secondLabel
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            text: qsTr("text")
+            touchPropagationMode: TouchPropagationMode.PassThrough
             textStyle {
                 textAlign: TextAlign.Center
             }
@@ -214,7 +214,7 @@ Page {
             id: thirdLabel
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            text: qsTr("is here")
+            touchPropagationMode: TouchPropagationMode.PassThrough
             preferredWidth: 130
             preferredHeight: 70
             textStyle {

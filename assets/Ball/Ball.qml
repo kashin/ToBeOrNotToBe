@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import tb.ntb 1.0
 
 ImageView {
     id: ballView
@@ -20,10 +21,14 @@ ImageView {
         imageSource = source
         //end of stupid hack
         ballAnimator.start()
+        if (imageSource == firstAsset) {
+            player.playSound()
+        }
         ignoreTaps = false
     }
     
     function stopAnimation() {
+        player.stop()
         ballAnimator.stopAt(3,2)
         ignoreTaps = true
     }
@@ -55,6 +60,12 @@ ImageView {
                     stopAnimation()
                 }
             }
+        }, //ImageAnimator
+        SoundPlayer {
+            id: player
+            muteSound: false
+            repeatSoundMode: 1
+            sourceUrl: "asset:///sounds/ball_rotation.wav"
         }
     ]
     gestureHandlers: [

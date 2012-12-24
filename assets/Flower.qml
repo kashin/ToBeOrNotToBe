@@ -161,6 +161,7 @@ Container {
         // adding some 'bonus leafs' if lovesMe == false, let's give users another chance :)
         if (flowerContainer.count() == 2 && flowerContainer.bonusRound && !flowerContainer.lovesMe) {
             moreLeafsSheet.open()
+            soundPlayer.playSound();
             flowerContainer.bonusRound = false;
         }
     }
@@ -233,6 +234,11 @@ Container {
             onClosed: {
                 flowerContainer.addBonusLeafs();
             }
-        }// Sheet
+        },// Sheet
+        SoundPlayer {
+            id: soundPlayer
+            muteSound: false
+            sourceUrl: "asset:///sounds/dialog_beep.wav"
+        }
     ]
 }
