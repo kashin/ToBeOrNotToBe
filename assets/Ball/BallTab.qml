@@ -138,6 +138,8 @@ Page {
             firstLabelFadeAnim.play()
             secondLabelFadeAnim.play()
             thirdLabelFadeAnim.play()
+            player.sourceUrl = "asset:///sounds/ball_answer_fadein.wav"
+            player.playSound()
         }
 
         function fadeOutAnwser() {
@@ -271,6 +273,10 @@ Page {
             ImagePaintDefinition {
                 id: ballBackground
                 imageSource: "asset:///images/ball_background.png"
+            },
+            SoundPlayer {
+                id: player
+                muteSound: false
             }
         ]
     }

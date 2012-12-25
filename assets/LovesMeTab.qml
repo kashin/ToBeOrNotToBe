@@ -47,8 +47,8 @@ Page {
             id: flower
             onLovesMeTextChanged: {
                 infoLabel.text = flower.lovesMeText;
-                var source = applicationSettings.flowerVoiceDefault
-                                + (lovesMe ? "1.WAV": "2.WAV");
+                var source = lovesMe ? "asset:///sounds/leaf_loves.wav" :
+                                       "asset:///sounds/leaf_loves_not.wav"
                 player.muteSound = !applicationSettings.useDefaultFlowerVoice;
                 player.setSourceUrl( source );
                 player.playSound();

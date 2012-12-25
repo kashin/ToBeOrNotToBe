@@ -39,6 +39,9 @@ Page {
                         outputLabel.textStyle.fontSizeValue = 40;
                         var value = Math.ceil(Math.random() * 99);
                         outputLabel.text = (value < 10 ? "0" : "") + value + "%";
+                        player.stop()
+                        player.sourceUrl = "asset:///sounds/ask_me_tap.ogg"
+                        player.playSound()
                     }
                 }
             ]
@@ -46,6 +49,10 @@ Page {
                 ImagePaintDefinition {
                     id: backgroundDef
                     imageSource: "asset:///images/probability_background.png"
+                },
+                SoundPlayer {
+                    id: player
+                    muteSound: false
                 }
             ]
         } // probabilityContainer

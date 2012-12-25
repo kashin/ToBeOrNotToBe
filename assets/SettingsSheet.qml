@@ -17,7 +17,7 @@ Sheet {
 
         Container {
             Label {
-                text: qsTr("Use Flower's Sample Voice")
+                text: qsTr("Enable leafs sounds")
                 multiline: true
             }
             ToggleButton {
