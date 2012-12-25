@@ -62,6 +62,10 @@ Container {
     }
 
     function resetFlower() {
+        if (soundPlayer.sourceUrl == "") {
+            // Increases startup performance
+            soundPlayer.sourceUrl = "asset:///sounds/dialog_beep.wav"
+        }
         // remove all leafs and a center and recreate them. This call also frees up memory
         flowerContainer.removeAll();
 
@@ -161,8 +165,8 @@ Container {
         // adding some 'bonus leafs' if lovesMe == false, let's give users another chance :)
         if (flowerContainer.count() == 2 && flowerContainer.bonusRound && !flowerContainer.lovesMe) {
             moreLeafsSheet.open()
-            soundPlayer.playSound();
-            flowerContainer.bonusRound = false;
+            soundPlayer.playSound()
+            flowerContainer.bonusRound = false
         }
     }
 
@@ -211,25 +215,30 @@ Container {
             id: moreLeafsSheet
             content: Page {
                 content: Container {
-                    Label {
-                        multiline: true
-                        text: qsTr("You are lucky!\n You found few more leafs on this flower")
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
-                        textStyle {
-                            textAlign: TextAlign.Center
-                            base: SystemDefaults.TextStyles.BigText
+                    layout: DockLayout {}
+                    Container {
+                            horizontalAlignment: HorizontalAlignment.Center
+                            verticalAlignment: VerticalAlignment.Center
+                        Label {
+                            multiline: true
+                            text: qsTr("You are lucky!\n You found few more leafs on this flower")
+                            horizontalAlignment: HorizontalAlignment.Center
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle {
+                                textAlign: TextAlign.Center
+                                base: SystemDefaults.TextStyles.BigText
+                            }
                         }
-                    }
-                    Button {
-                        text: qsTr("Ok")
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
-                        onClicked: {
-                            moreLeafsSheet.close();
+                        Button {
+                            text: qsTr("Ok")
+                            horizontalAlignment: HorizontalAlignment.Center
+                            verticalAlignment: VerticalAlignment.Center
+                            onClicked: {
+                                moreLeafsSheet.close();
+                            }
                         }
-                    }
-                } // Container
+                    } // Container
+                }// Container
             }
             onClosed: {
                 flowerContainer.addBonusLeafs();
@@ -238,7 +247,7 @@ Container {
         SoundPlayer {
             id: soundPlayer
             muteSound: false
-            sourceUrl: "asset:///sounds/dialog_beep.wav"
+            sourceUrl: ""
         }
     ]
 }

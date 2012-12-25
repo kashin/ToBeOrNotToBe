@@ -59,7 +59,7 @@ Page {
                     break;
                 }
                 case 7: {
-                    firstLabel.text = ""
+                    firstLabel.text = qsTr(" ")
                     secondLabel.text = qsTr("No.")
                     thirdLabel.text = ""
                     break;
@@ -95,7 +95,7 @@ Page {
                     break;
                 }
                 case 13: {
-                    firstLabel.text = qsTr("Cannot")
+                    firstLabel.text = qsTr("Can't")
                     secondLabel.text = qsTr("predict")
                     thirdLabel.text = qsTr("now.")
                     break;
@@ -169,9 +169,9 @@ Page {
             textStyle {
                 textAlign: TextAlign.Center
             }
-            preferredWidth: 130
+            preferredWidth: 210
             preferredHeight: 70
-            translationY: -70
+            translationY: -65
             opacity: 0
             animations: [
                 FadeTransition {
@@ -198,7 +198,7 @@ Page {
             textStyle {
                 textAlign: TextAlign.Center
             }
-            preferredWidth: 130
+            preferredWidth: 240
             preferredHeight: 70
             opacity: 0
             animations: [
@@ -215,12 +215,12 @@ Page {
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
             touchPropagationMode: TouchPropagationMode.PassThrough
-            preferredWidth: 130
+            preferredWidth: 210
             preferredHeight: 70
             textStyle {
                 textAlign: TextAlign.Center
             }
-            translationY: 70
+            translationY: 65
             opacity: 0
             animations: [
                 FadeTransition {

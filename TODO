@@ -1,5 +1,4 @@
-1) Fix MediaPlayer. Problem described here: http://supportforums.blackberry.com/t5/Cascades-Development/MediaPlayer-prepare-Error-attaching-input-source/m-p/2012985#M7380
-2) We should use a flower's center coordinates as a base coordinates.
-3) Fix WebView problem with "handle exit message". http://supportforums.blackberry.com/t5/Cascades-Development/Application-did-not-handle-exit-message-and-was-slayed/td-p/1825981/page/3
-4) Fix the support page and "mailto" links
-5) Add another tab with 'hidden' images. User should open 3 similar images to 'win'.
+1) Update 'AboutWebView'. Should we replace WebView with a Label's 'ActiveText' feature?
+2) Fix MediaPlayer. Problem described here: http://supportforums.blackberry.com/t5/Cascades-Development/MediaPlayer-prepare-Error-attaching-input-source/m-p/2012985#M7380
+3) Fix the support page and "mailto" links
+4) Add another tab with 'hidden' images. User should open 3 similar images to 'win'.
