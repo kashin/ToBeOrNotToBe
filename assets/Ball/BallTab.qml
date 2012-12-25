@@ -123,6 +123,9 @@ Page {
 
         function fadeInAnwser() {
             updateAnswerText();
+            firstLabel.visible = true
+            secondLabel.visible = true
+            thirdLabel.visible = true
             firstLabelFadeAnim.fromOpacity = 0
             firstLabelFadeAnim.toOpacity = 1
             firstLabelFadeAnim.duration = 300
@@ -165,7 +168,6 @@ Page {
             id: firstLabel
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            touchPropagationMode: TouchPropagationMode.PassThrough
             textStyle {
                 textAlign: TextAlign.Center
             }
@@ -173,6 +175,7 @@ Page {
             preferredHeight: 70
             translationY: -65
             opacity: 0
+            visible: false
             animations: [
                 FadeTransition {
                     id: firstLabelFadeAnim
@@ -181,12 +184,23 @@ Page {
                     duration: 300
                 }
             ]
+            gestureHandlers: [
+                TapHandler {
+                    onTapped: {
+                        console.log("first Label: processTap")
+                        ball.processTap()
+                    }
+                }
+            ]
             onOpacityChanged: {
                 if (opacity == 0) {
                     ball.isShowingText = false
                     ball.ignoreTaps = false
                     ball.imageSource = ball.thirdAsset
                     ball.startAnimation()
+                    firstLabel.visible = false
+                    secondLabel.visible = false
+                    thirdLabel.visible = false
                 }
             }
         }
@@ -194,13 +208,13 @@ Page {
             id: secondLabel
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            touchPropagationMode: TouchPropagationMode.PassThrough
             textStyle {
                 textAlign: TextAlign.Center
             }
             preferredWidth: 240
             preferredHeight: 70
             opacity: 0
+            visible: false
             animations: [
                 FadeTransition {
                     id: secondLabelFadeAnim
@@ -209,12 +223,19 @@ Page {
                     duration: 500
                 }
             ]
+            gestureHandlers: [
+                TapHandler {
+                    onTapped: {
+                        console.log("second Label: processTap")
+                        ball.processTap()
+                    }
+                }
+            ]
         }
         Label {
             id: thirdLabel
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            touchPropagationMode: TouchPropagationMode.PassThrough
             preferredWidth: 210
             preferredHeight: 70
             textStyle {
@@ -222,12 +243,21 @@ Page {
             }
             translationY: 65
             opacity: 0
+            visible: false
             animations: [
                 FadeTransition {
                     id: thirdLabelFadeAnim
                     fromOpacity: 0
                     toOpacity: 1
                     duration: 700
+                }
+            ]
+            gestureHandlers: [
+                TapHandler {
+                    onTapped: {
+                        console.log("thirdLabel: processTap")
+                        ball.processTap()
+                    }
                 }
             ]
             onOpacityChanged: {

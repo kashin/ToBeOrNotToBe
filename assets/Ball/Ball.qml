@@ -13,7 +13,24 @@ ImageView {
 
     signal showText()
     signal hideText()
-    
+
+    function processTap() {
+        console.log("processTap")
+        if(ballView.ignoreTaps) {
+            return;
+        }
+        if (isShowingText) {
+            ballView.hideText()
+            ignoreTaps = true
+            return;
+        }
+        if (ballAnimator.running) {
+            stopAnimation()
+        } else {
+            startAnimation()
+        }
+    }
+
     function startAnimation() {
         // start of stupid hack
         var source = imageSource
@@ -71,19 +88,7 @@ ImageView {
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                if(ballView.ignoreTaps) {
-                    return;
-                }
-                if (isShowingText) {
-                    ballView.hideText()
-                    ignoreTaps = true
-                    return;
-                }
-                if (ballAnimator.running) {
-                    stopAnimation()
-                } else {
-                    startAnimation()
-                }
+                processTap()
             }
         }
     ]
