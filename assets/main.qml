@@ -62,8 +62,7 @@ TabbedPane {
                             }
                         }
         attachedObjects: [
-            // FIXME: Workaround for "application can't handle 'exit' signal"
-            // Adds a different problem with couple of "ERROR: Context: Object name=" <ObjectName> " [objectId= <id> ] not unrealized" errors
+            // Workaround for http://supportforums.blackberry.com/t5/Cascades-Development/Beta-4-Application-Menu-Issue/td-p/2010717
             ComponentDefinition {
                 id: aboutSheetDef
                 content: Sheet {
@@ -106,9 +105,17 @@ TabbedPane {
     Tab {
         id: flowerTab
         title: qsTr("Loves Me Or Not")
+        image: flowerIcon.image
         LovesMeTab {
             id: lovesMeTab
         }
+        attachedObjects: [
+            ImagePaintDefinition {
+                id: flowerIcon
+                repeatPattern: RepeatPattern.Fill
+                imageSource: "asset:///images/flower_icon.png"
+            }
+        ]
     }
     Tab {
         id: ballTab
@@ -119,6 +126,7 @@ TabbedPane {
             }
         ]
         title: qsTr("Magic ball")
+        imageSource: "asset:///images/ball_icon.png"
         onTriggered: {
             if (content == undefined) {
                 var ballPageCreated = ballTabDef.createObject(parent);
@@ -129,9 +137,9 @@ TabbedPane {
     Tab {
         id: askRandomTab
         title: qsTr("Ask Random")
+        imageSource: "asset:///images/ask_me_icon.png"
         onTriggered: {
             if (content == undefined) {
-                console.log("new content for the tab");
                 var createdTab = askRandomTabDef.createObject(parent);
                 content = createdTab;
             }

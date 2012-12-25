@@ -75,6 +75,9 @@
     
     <!--  The category where the application appears. Either core.games or core.media. -->
     <category>core.games</category>
+    <splashScreens>
+       <image>assets/images/cover.png</image>
+    </splashScreens>
     <configuration id="com.qnx.qcc.toolChain.980791570" name="Default">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/ToBeOrNotToBe" entry="true" type="Qnx/Elf">ToBeOrNotToBe</asset>
@@ -94,20 +97,17 @@
     
     <!--  The icon for the application, which should be 86x86. -->
     <icon>
-        <image>icon.png</image>
         <image>
-           <text xml:lang="en-US">icon.png</text>
+           <text xml:lang="en-US">assets/images/cover.png</text>
         </image>
         <image>
-           <text xml:lang="ru">icon.png</text>
+           <text xml:lang="ru">assets/images/cover.png</text>
         </image>
+        <image>assets/images/cover.png</image>
     </icon>
 
     <asset path="icon.png">icon.png</asset>
     <asset path="assets">assets</asset>
-    <!--  The splash screen that will appear when your application is launching. Should be 1024x600. -->
-    <!-- <splashscreen></splashscreen> -->
-    
     <!-- Locale support -->
     <asset path="translations" dest="qm">
         <include name="*.qm"/>

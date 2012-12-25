@@ -1,95 +1,93 @@
 import bb.cascades 1.0
 import tb.ntb 1.0
-import custom.lib 1.0
 
-Container {
-    id: ballContainer
-    
-    layout: DockLayout {
-            }
-    property int coordinateX: 0
-    property int coordinateY: 0
+ImageView {
+    id: ballView
 
-    horizontalAlignment: HorizontalAlignment.Center
-    verticalAlignment: VerticalAlignment.Center 
-    preferredHeight: 600
-    preferredWidth: 600
+    property bool isShowingText: false
+    property bool ignoreTaps: false
+
+    property string firstAsset: "asset:///images/ball1.gif"
+    property string secondAsset: "asset:///images/ball2.gif"
+    property string thirdAsset: "asset:///images/ball3.gif"
+
+    signal showText()
+    signal hideText()
     
-    onCreationCompleted: {
-        /*var ballAssCreated = ballAssComponent.createObject(parent)
-        add(ballAssCreated);
-        ballAssCreated = ballFaceComponent.createObject(parent)
-        add(ballAssCreated);*/
-    }
-    
-    
-    onCoordinateXChanged: {
-        ball.centerX = ballContainer.coordinateX;
-    }
-    
-    onCoordinateYChanged: {
-        ball.centerX = ballContainer.coordinateX;
-    }
-    // Create the CircularSlider and lay it out
-            // just like any other control.
-            BallView {
-                id: ball
-                horizontalAlignment: HorizontalAlignment.Center
-                verticalAlignment: VerticalAlignment.Center
-                // Capture the valueChanged signal and update
-                // the label.
-                value: 1
-                onValueChanged: {
-                    console.log(value);
-                    //label.text = value;
-                }
-                onCenterXChanged: {
-                }
-                onCenterYChanged: {
-                }
-            } // Ends the circular slider
-    /*Label {
-        id: label
-        text: "Olala"
-    }
-    Button {
-        id: button
-        text: "PUUUsh"
-        onClicked: {
-            circularSlider.value = 10;
+    function startAnimation() {
+        // start of stupid hack
+        var source = imageSource
+        imageSource = ""
+        imageSource = source
+        //end of stupid hack
+        ballAnimator.start()
+        if (imageSource == firstAsset) {
+            player.playSound()
         }
-    }*/
-    /*attachedObjects: [
-            BallLogic {
-                 id: ballLogic
-                 value: 1
-                 onValueChanged: {
-                             
-                 }
-           }
-    ]*/
-    /*attachedObjects: [
-            ComponentDefinition {
-                id: ballAssComponent
-                content: ImageView {
-                        id: ballAss
-                        imageSource: "asset:///images/ball_ass2.png"
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
-                        scalingMethod: ScalingMethod.Fill
-                        opacity: 0
+        ignoreTaps = false
+    }
+    
+    function stopAnimation() {
+        player.stop()
+        ballAnimator.stopAt(3,2)
+        ignoreTaps = true
+    }
+
+    imageSource: firstAsset
+    horizontalAlignment: HorizontalAlignment.Center
+    verticalAlignment: VerticalAlignment.Center
+    preferredHeight: 700
+    preferredWidth: 700
+
+    attachedObjects: [
+        ImageAnimator {
+            id: ballAnimator
+            property bool isInitialized: false
+            animatedImage: ballView.image
+            onRunningChanged: {
+                if(!running && isInitialized) {
+                    if ( ballView.imageSource == firstAsset ) {
+                        ballView.imageSource = secondAsset
+                        startAnimation()
+                    } else if ( ballView.imageSource == secondAsset ) {
+                        ballView.showText()
+                        ignoreTaps = true
+                    } else if( ballView.imageSource == thirdAsset ) {
+                        ballView.imageSource = firstAsset
+                        startAnimation()
                     }
-            },
-            ComponentDefinition {
-                id: ballFaceComponent
-                content: ImageView {
-                        id: ballFace
-                        imageSource: "asset:///images/ball_face2.png"
-                        horizontalAlignment: HorizontalAlignment.Center
-                        verticalAlignment: VerticalAlignment.Center
-                        scalingMethod: ScalingMethod.Fill
-                        opacity: 1
-                    }
+                } else if(running && ( ballView.imageSource == secondAsset  || ballView.imageSource == thirdAsset )) {
+                    stopAnimation()
+                }
             }
-    ]*/
-}
+        }, //ImageAnimator
+        SoundPlayer {
+            id: player
+            muteSound: false
+            repeatSoundMode: 1
+            sourceUrl: "asset:///sounds/ball_rotation.wav"
+        }
+    ]
+    gestureHandlers: [
+        TapHandler {
+            onTapped: {
+                if(ballView.ignoreTaps) {
+                    return;
+                }
+                if (isShowingText) {
+                    ballView.hideText()
+                    ignoreTaps = true
+                    return;
+                }
+                if (ballAnimator.running) {
+                    stopAnimation()
+                } else {
+                    startAnimation()
+                }
+            }
+        }
+    ]
+    onCreationCompleted: {
+        ballAnimator.isInitialized = true
+    }
+} // ImageView

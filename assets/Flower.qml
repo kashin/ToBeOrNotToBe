@@ -9,6 +9,8 @@ Container {
     property int bonusLeafsMaxCount: 7
     property int rotationAngle: 17
 
+    background: flowerBackground.imagePaint
+
     function addBonusLeafs() {
         flowerContainer.removeAll();
         // not less then 360/rotationAngle - 1 leafs should be on the screen to get 'full' flower (360 degrees) :)
@@ -21,6 +23,9 @@ Container {
         var yDiff = 4*yMaximum/(360/rotationAngle);
         var xTranslation = -xDiff;
         var yTranslation = -yMaximum - yDiff;
+
+        var createdFootStalk = chamomileFootstalkComponent.createObject(this);
+        flowerContainer.add(createdFootStalk);
         while (i < leafsCount) {
             var createdLeaf = leafComponent.createObject(parent);
             flowerContainer.add(createdLeaf);
@@ -74,6 +79,9 @@ Container {
         var yDiff = 4*yMaximum/(360/rotationAngle);
         var xTranslation = -xDiff;
         var yTranslation = -yMaximum - yDiff;
+
+        var createdFootStalk = chamomileFootstalkComponent.createObject(this);
+        flowerContainer.add(createdFootStalk);
         while (i < leafsCount) {
             var createdLeaf = leafComponent.createObject(parent);
             flowerContainer.add(createdLeaf);
@@ -122,7 +130,7 @@ Container {
     }
 
     function onDragLeafStarted(leaf) {
-        for (var j = 0 ; j < flowerContainer.count() - 1; j++) {
+        for (var j = 1 ; j < flowerContainer.count() - 1; j++) {
             var leafObject = flowerContainer.at(j);
             if (leafObject.objectName != leaf) {
                 leafObject.anotherLeafDragStarted = true;
@@ -132,7 +140,7 @@ Container {
     }
 
     function onDragLeafStoped(leaf) {
-        for (var j = 0 ; j < flowerContainer.count() - 1; j++) {
+        for (var j = 1 ; j < flowerContainer.count() - 1; j++) {
             var leafObject = flowerContainer.at(j);
             if (leafObject.objectName != leaf) {
                 leafObject.anotherLeafDragStarted = false;
@@ -151,8 +159,9 @@ Container {
 
     onControlRemoved: {
         // adding some 'bonus leafs' if lovesMe == false, let's give users another chance :)
-        if (flowerContainer.count() == 1 && flowerContainer.bonusRound && !flowerContainer.lovesMe) {
+        if (flowerContainer.count() == 2 && flowerContainer.bonusRound && !flowerContainer.lovesMe) {
             moreLeafsSheet.open()
+            soundPlayer.playSound();
             flowerContainer.bonusRound = false;
         }
     }
@@ -160,6 +169,11 @@ Container {
     attachedObjects: [
         Settings {
             id: applicationSettings
+        },
+        ImagePaintDefinition {
+            id: flowerBackground
+            imageSource: "asset:///images/grass.png"
+            repeatPattern: RepeatPattern.Fill
         },
         ComponentDefinition {
             id: leafComponent
@@ -176,6 +190,21 @@ Container {
                     scalingMethod: ScalingMethod.Fill
                     preferredHeight: 270
                     preferredWidth: 270
+                }
+        },
+        ComponentDefinition {
+            id: chamomileFootstalkComponent
+            content: ImageView {
+                    id: chamomileFootstalk
+                    touchPropagationMode: TouchPropagationMode.PassThrough
+                    imageSource: "asset:///images/footstalk.png"
+                    horizontalAlignment: HorizontalAlignment.Center
+                    verticalAlignment: VerticalAlignment.Center
+                    scalingMethod: ScalingMethod.Fill
+                    preferredHeight: 320
+                    preferredWidth: 255
+                    translationY: 225
+                    translationX: 82
                 }
         },
         Sheet {
@@ -205,6 +234,11 @@ Container {
             onClosed: {
                 flowerContainer.addBonusLeafs();
             }
-        }// Sheet
+        },// Sheet
+        SoundPlayer {
+            id: soundPlayer
+            muteSound: false
+            sourceUrl: "asset:///sounds/dialog_beep.wav"
+        }
     ]
 }

@@ -21,30 +21,38 @@ ImageView {
     property int previousCurrentY: 0
     property int fullRoundsCount: 0
     property int countBeforeRemoveInitialRotation: 5
+    property int ignoreTouchEventsFurtherThan: 10
 
     signal leafIsGone(variant leaf)
     signal dragStarted(variant leaf)
     signal dragStoped(variant leaf)
 
     function resetLeaf() {
-        translationY = initialTranslationY;
-        translationX = initialTranslationX;
-        rotationZ = initialRotation;
         isDragable = true;
         visible = true;
         anotherLeafDragStarted = false;
         isDragStarted = false;
+        translationY = initialTranslationY;
+        translationX = initialTranslationX;
+        rotationZ = initialRotation;
         countBeforeRemoveInitialRotation = 5;
+        implicitAnimationController.enabled = true;
     }
 
     onInitialTranslationXChanged: {
-        translationX = initialTranslationX;
+        if (!isDragStarted) {
+            translationX = initialTranslationX;
+        }
     }
     onInitialTranslationYChanged: {
-        translationY = initialTranslationY;
+        if (!isDragStarted) {
+            translationY = initialTranslationY;
+        }
     }
     onInitialRotationChanged: {
-        rotationZ = initialRotation;
+        if (!isDragStarted) {
+            rotationZ = initialRotation;
+        }
     }
 
     onTouch: {
@@ -64,6 +72,11 @@ ImageView {
         } else if (event.isMove() && isDragStarted) {
             var currentY = event.windowY - firstTouchPositionY;
             var currentX = event.windowX - firstTouchPositionX;
+            // ignoring if last touch event is somewhere reeeeally close to the original touch position
+            if (currentX >= -ignoreTouchEventsFurtherThan && currentX <= ignoreTouchEventsFurtherThan &&
+                currentY >= -ignoreTouchEventsFurtherThan && currentY <= ignoreTouchEventsFurtherThan ) {
+                    return;
+                }
             // lets count Z rotation
             var angle = - ((Math.atan(currentX / currentY) * 180 / Math.PI));
             if (currentY > 0) {
@@ -82,20 +95,23 @@ ImageView {
                 rotationZ = angle + additionalAngle + initialRotation;
             }
             if (countBeforeRemoveInitialRotation >= 0) {
-                countBeforeRemoveInitialRotation--
+                countBeforeRemoveInitialRotation--;
                 if (countBeforeRemoveInitialRotation == 0) {
+                    implicitAnimationController.enabled = false;
                     // FIXME: do we need this stupid 'if else' logic?
                     if ( initialRotation >= 270 && initialRotation < 360) {
                         initialRotation = 360;
                     } else {
                         initialRotation = 0;
                     }
+                    rotationZ = angle + additionalAngle + initialRotation;
+                    implicitAnimationController.enabled = true;
                 }
             }
             previousCurrentY = currentY
             translationY = initialTranslationY + currentY;
             translationX = initialTranslationX + currentX;
-        } else if (event.isUp() && isDragStarted) {
+        } else if ( (event.isUp() || event.isCancel() ) && isDragStarted) {
             dragStoped(leafImageView.objectName);
             isDragable = false;
             isDragStarted = false;
@@ -118,5 +134,12 @@ ImageView {
                 target.leafIsGone(leafImageView);
             }
         }
+    ]
+    attachedObjects: [
+         ImplicitAnimationController {
+             id: implicitAnimationController
+             propertyName: "rotationZ"
+             enabled: true
+         }
     ]
 }
