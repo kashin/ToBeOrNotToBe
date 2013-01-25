@@ -14,6 +14,9 @@ ScrollView {
         WebView {
             id: webView
             url: "local:///assets/About.htm"
+            settings {
+                javaScriptEnabled: false
+            }
             
             onMinContentScaleChanged: {
                 scrollView.scrollViewProperties.minContentScale = minContentScale;
@@ -21,6 +24,9 @@ ScrollView {
             
             onMaxContentScaleChanged: {
                 scrollView.scrollViewProperties.maxContentScale = maxContentScale;
+            }
+            onUrlChanged: {
+                url = "local:///assets/About.htm"
             }
         }
     }
