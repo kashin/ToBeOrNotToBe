@@ -1,0 +1,12 @@
+x86*
+arm*
+*.orig*
+.cproject
+translations/*.ts
+assets/sounds/*
+assets/images/*
+assets/*.preview*
+assets/Ball/.preview*
+assets/AskRandom/*.preview*
+.settings/*
+*Makefile*
