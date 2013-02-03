@@ -109,6 +109,11 @@ TabbedPane {
         LovesMeTab {
             id: lovesMeTab
         }
+        onTriggered: {
+            if ( ballTab.content ) {
+                ballTab.content.activeTab = false
+            }
+        }
         attachedObjects: [
             ImagePaintDefinition {
                 id: flowerIcon
@@ -132,6 +137,7 @@ TabbedPane {
                 var ballPageCreated = ballTabDef.createObject(parent);
                 content = ballPageCreated;
             }
+            content.activeTab = true
         }
     }
     Tab {
@@ -143,6 +149,7 @@ TabbedPane {
                 var createdTab = askRandomTabDef.createObject(parent);
                 content = createdTab;
             }
+            ballTab.content.activeTab = false
         }
         attachedObjects: [
             ComponentDefinition {

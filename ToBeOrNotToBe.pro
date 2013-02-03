@@ -1,8 +1,9 @@
 TEMPLATE = app
 TARGET = ToBeOrNotToBe
 
-CONFIG += qt warn_on debug_and_release cascades
+CONFIG += qt warn_on debug_and_release cascades mobility
 
+QT += declarative
 MOBILITY += sensors
 
 INCLUDEPATH += ../src
@@ -11,7 +12,6 @@ HEADERS += ../src/*.hpp ../src/*.h
 
 LIBS += -lbbmultimedia
 LIBS += -lbbdevice
-LIBS += -lcamapi
 
 lupdate_inclusion {
     SOURCES += ../assets/*.qml

@@ -1,13 +1,16 @@
 import bb.cascades 1.0
 import tb.ntb 1.0
+import QtMobility.sensors 1.2
 
 Page {
+    id: magicBall
+
+    property bool activeTab: false
 
     titleBar: TitleBar {
         appearance: TitleBarAppearance.Plain
         title: qsTr("Ask me...")
     }
-    id: magicBall
 
     Container {
         id: ballContainer
@@ -189,7 +192,6 @@ Page {
             gestureHandlers: [
                 TapHandler {
                     onTapped: {
-                        console.log("first Label: processTap")
                         ball.processTap()
                     }
                 }
@@ -228,7 +230,6 @@ Page {
             gestureHandlers: [
                 TapHandler {
                     onTapped: {
-                        console.log("second Label: processTap")
                         ball.processTap()
                     }
                 }
@@ -257,7 +258,6 @@ Page {
             gestureHandlers: [
                 TapHandler {
                     onTapped: {
-                        console.log("thirdLabel: processTap")
                         ball.processTap()
                     }
                 }
@@ -277,6 +277,54 @@ Page {
             SoundPlayer {
                 id: player
                 muteSound: false
+            },
+            Gyroscope {
+                id: shakeSensor
+
+                property bool shaking: false
+
+                active: magicBall.activeTab
+
+                // We shouldn't keep the sensor active when the app isn't visible or the screen is off
+                alwaysOn: false
+
+                // If the device isn't moving (x&y&z==0), don't send updates, saves power
+                skipDuplicates: true
+
+                onReadingChanged: { // Called when a new user accel reading is available
+                    if ( (reading.x >= 0 || reading.y >= 0 || reading.z >=0 ) && !shaking) {
+                        shaking = true
+                        ball.processTap()
+                    } else if (shaking) {
+                        shaking = false
+                        ball.processTap()
+                    }
+                }
+            },
+            ProximitySensor {
+                id: proximitySensor
+
+                active: magicBall.activeTab
+
+                // Added to avoid start of the ball animation when tab is just opened
+                property bool isFirstChange: true
+
+                // We shouldn't keep the sensor active when the app isn't visible or the screen is off
+                alwaysOn: false
+
+                skipDuplicates: true
+
+                onReadingChanged: { // Called when a new proximity reading is available
+                    if ( isFirstChange ) {
+                        isFirstChange = false
+                        return;
+                    }
+                    if (reading.close) {
+                        ball.processTap()
+                    } else {
+                        ball.processTap()
+                    }
+                }
             }
         ]
     }
