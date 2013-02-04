@@ -292,7 +292,7 @@ Page {
                 skipDuplicates: true
 
                 onReadingChanged: { // Called when a new user accel reading is available
-                    if ( (reading.x >= 0 || reading.y >= 0 || reading.z >=0 ) && !shaking) {
+                    if ( ( Math.abs(reading.y) >= 180.0 && Math.abs(reading.z) >= 180.0 ) && !shaking) {
                         shaking = true
                         ball.processTap()
                     } else if (shaking) {
