@@ -87,6 +87,10 @@ Container {
         var createdFootStalk = chamomileFootstalkComponent.createObject(this);
         flowerContainer.add(createdFootStalk);
         while (i < leafsCount) {
+            if (applicationSettings.flowerTryCountLeft <= 0) {
+                break
+            }
+
             var createdLeaf = leafComponent.createObject(parent);
             flowerContainer.add(createdLeaf);
             createdLeaf.leafIsGone.connect(flowerContainer.onLeafIsGone);
@@ -164,9 +168,13 @@ Container {
     onControlRemoved: {
         // adding some 'bonus leafs' if lovesMe == false, let's give users another chance :)
         if (flowerContainer.count() == 2 && flowerContainer.bonusRound && !flowerContainer.lovesMe) {
+            if (applicationSettings.flowerTryCountLeft <= 0) {
+                moreLeafsSheetLabel.text = qsTr("Sorry,\nno more attempts\nin the demo")
+            }
             moreLeafsSheet.open()
             soundPlayer.playSound()
             flowerContainer.bonusRound = false
+            applicationSettings.flowerTryCountLeft--
         }
     }
 
@@ -220,6 +228,7 @@ Container {
                             horizontalAlignment: HorizontalAlignment.Center
                             verticalAlignment: VerticalAlignment.Center
                         Label {
+                            id: moreLeafsSheetLabel
                             multiline: true
                             text: qsTr("You are lucky!\n You found few more leafs on this flower")
                             horizontalAlignment: HorizontalAlignment.Center
@@ -241,6 +250,9 @@ Container {
                 }// Container
             }
             onClosed: {
+                if (applicationSettings.flowerTryCountLeft <= 0) {
+                    return
+                }
                 flowerContainer.addBonusLeafs();
             }
         },// Sheet

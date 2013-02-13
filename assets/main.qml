@@ -12,6 +12,7 @@ TabbedPane {
                 id: muteAction
                 imageSource: "asset:///images/sounds_on.png"
                 title: qsTr("Sounds on")
+                property variant createdDialog: 0
 
                 function updateSoundsAction() {
                     if (applicationSettings.mute) {
@@ -22,13 +23,26 @@ TabbedPane {
                         title = qsTr("Sounds on");
                     }
                 }
+                function onDialogClosed() {
+                    delete createdDialog
+                    createdDialog = 0
+                }
+
                 onTriggered: {
-                    applicationSettings.mute = !applicationSettings.mute;
-                    updateSoundsAction();
+                    createdDialog = showMessageDialogDefinition.createObject(parent)
+                    createdDialog.closed.connect(onDialogClosed);
+                    createdDialog.text = qsTr("Sorry, you can't turn off sounds\nin demo application")
+                    createdDialog.open()
                 }
                 onCreationCompleted: {
-                    updateSoundsAction();
+                    applicationSettings.mute = false
                 }
+                attachedObjects: [
+                    ComponentDefinition {
+                        id: showMessageDialogDefinition
+                        source: "asset:///ShowMessageDialog.qml"
+                    }
+                ]
             }
         ]
         helpAction: HelpActionItem {
@@ -56,8 +70,9 @@ TabbedPane {
                             }
 
                             onTriggered: {
-                                createdSheet = settingsSheetDef.createObject(parent);
+                                createdSheet = showMessageDialogDefinition.createObject(parent);
                                 createdSheet.closed.connect(onSheetClosed);
+                                createdSheet.text = qsTr("Sorry, you can't use settings\nin demo application")
                                 createdSheet.open();
                             }
                         }

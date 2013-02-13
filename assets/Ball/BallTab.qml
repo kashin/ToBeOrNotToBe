@@ -126,10 +126,21 @@ Page {
 
         function fadeInAnwser() {
             if (applicationSettings.ballTryCountLeft <= 0) {
-                // show some dialog here
+                firstLabel.text = qsTr("no more")
+                secondLabel.text = qsTr("attempts")
+                firstLabel.visible = true
+                secondLabel.visible = true
+                firstLabelFadeAnim.fromOpacity = 0
+                firstLabelFadeAnim.toOpacity = 1
+                firstLabelFadeAnim.duration = 300
+                secondLabelFadeAnim.fromOpacity = 0
+                secondLabelFadeAnim.toOpacity = 1
+                secondLabelFadeAnim.duration = 500
+                firstLabelFadeAnim.play()
+                secondLabelFadeAnim.play()
                 return
             }
-            applicationSettings.ballTryCountLeft++
+            applicationSettings.ballTryCountLeft--
             updateAnswerText()
             firstLabel.visible = true
             secondLabel.visible = true

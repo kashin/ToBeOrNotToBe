@@ -26,7 +26,7 @@ ScrollView {
                 scrollView.scrollViewProperties.maxContentScale = maxContentScale;
             }
             onUrlChanged: {
-                url = "local:///assets/About.htm"
+                webView.url = "local:///assets/About.htm"
             }
         }
     }

@@ -9,7 +9,11 @@ Page {
               }
     function resetFlower() {
         flower.resetFlower();
-        infoLabel.text = qsTr("Loves Me Or Not?");
+        if (applicationSettings.flowerTryCountLeft <= 0) {
+            infoLabel.text = qsTr("No more attempts.");
+        } else {
+            infoLabel.text = qsTr("Loves Me Or Not?");
+        }
     }
     actions: [
         ActionItem {

@@ -12,7 +12,7 @@ using namespace bb::cascades;
 App::App()
 {
     QCoreApplication::setOrganizationName("MasterDon");
-    QCoreApplication::setApplicationName("ToBeOrNotToBe");
+    QCoreApplication::setApplicationName("ToBeOrNotToBeDemo");
     qmlRegisterType<Settings>("tb.ntb", 1, 0, "Settings");
     qmlRegisterType<TBNTBMediaPlayer>("tb.ntb", 1, 0, "SoundPlayer");
 

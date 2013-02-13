@@ -82,6 +82,20 @@ void Settings::setBallTryCountLeft(int /*newBallTryCountLeft*/)
 	const int current = ballTryCountLeft();
 	if (current > 0) {
 		setValue("ballTryCountLeft", current - 1);
-		emit leafsCountChanged(current - 1);
+		emit ballTryCountLeftChanged(current - 1);
+	}
+}
+
+int Settings::flowerTryCountLeft()
+{
+	return value("flowerTryCountLeft", 3).toInt();
+}
+
+void Settings::setFlowerTryCountLeft(int /*newBallTryCountLeft*/)
+{
+	const int current = flowerTryCountLeft();
+	if (current > 0) {
+		setValue("flowerTryCountLeft", current - 1);
+		emit flowerTryCountLeftChanged(current - 1);
 	}
 }

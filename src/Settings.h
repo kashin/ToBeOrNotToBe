@@ -43,6 +43,11 @@ public:
 	 */
 	Q_PROPERTY( int ballTryCountLeft READ ballTryCountLeft WRITE setBallTryCountLeft NOTIFY ballTryCountLeftChanged )
 
+	/**
+	 * used for Flower demo. Simple limitation.
+	 */
+	Q_PROPERTY( int flowerTryCountLeft READ flowerTryCountLeft WRITE setFlowerTryCountLeft NOTIFY flowerTryCountLeftChanged )
+
 public:
 	Settings(QObject * parent = 0);
 
@@ -67,12 +72,16 @@ public slots:
 	int ballTryCountLeft();
 	void setBallTryCountLeft(int newBallTryCountLeft);
 
+	int flowerTryCountLeft();
+	void setFlowerTryCountLeft(int newBallTryCountLeft);
+
 	signals:
     void muteChanged(bool newMute);
     void useDefaultFlowerVoiceChanged(bool newUseDefaultFlowerVoice);
     void flowerVoiceChanged(QString newflowerVoice);
     void leafsCountChanged(int newLeafsCount);
     void ballTryCountLeftChanged(int newBallTryCountLeft);
+    void flowerTryCountLeftChanged(int newFlowerTryCountLeft);
 };
 
 #endif // TOBEORNOTTOBE_SETTINGS
