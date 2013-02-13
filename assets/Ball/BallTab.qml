@@ -125,7 +125,12 @@ Page {
         }
 
         function fadeInAnwser() {
-            updateAnswerText();
+            if (applicationSettings.ballTryCountLeft <= 0) {
+                // show some dialog here
+                return
+            }
+            applicationSettings.ballTryCountLeft++
+            updateAnswerText()
             firstLabel.visible = true
             secondLabel.visible = true
             thirdLabel.visible = true
@@ -277,6 +282,9 @@ Page {
             SoundPlayer {
                 id: player
                 muteSound: false
+            },
+            Settings {
+                id: applicationSettings
             },
             Gyroscope {
                 id: shakeSensor

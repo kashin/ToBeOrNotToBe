@@ -38,6 +38,11 @@ public:
 	 */
 	Q_PROPERTY( int leafsCount READ leafsCount WRITE setLeafsCount NOTIFY leafsCountChanged )
 
+	/**
+	 * used for Magic Ball demo. Simple limitation.
+	 */
+	Q_PROPERTY( int ballTryCountLeft READ ballTryCountLeft WRITE setBallTryCountLeft NOTIFY ballTryCountLeftChanged )
+
 public:
 	Settings(QObject * parent = 0);
 
@@ -59,11 +64,15 @@ public slots:
 	int leafsCount();
 	void setLeafsCount(int newLeafsCount);
 
-signals:
+	int ballTryCountLeft();
+	void setBallTryCountLeft(int newBallTryCountLeft);
+
+	signals:
     void muteChanged(bool newMute);
     void useDefaultFlowerVoiceChanged(bool newUseDefaultFlowerVoice);
     void flowerVoiceChanged(QString newflowerVoice);
     void leafsCountChanged(int newLeafsCount);
+    void ballTryCountLeftChanged(int newBallTryCountLeft);
 };
 
 #endif // TOBEORNOTTOBE_SETTINGS

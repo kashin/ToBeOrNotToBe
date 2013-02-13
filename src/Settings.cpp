@@ -72,3 +72,16 @@ void Settings::setLeafsCount(int newLeafsCount)
 	}
 }
 
+int Settings::ballTryCountLeft()
+{
+	return value("ballTryCountLeft", 5).toInt();
+}
+
+void Settings::setBallTryCountLeft(int /*newBallTryCountLeft*/)
+{
+	const int current = ballTryCountLeft();
+	if (current > 0) {
+		setValue("ballTryCountLeft", current - 1);
+		emit leafsCountChanged(current - 1);
+	}
+}
