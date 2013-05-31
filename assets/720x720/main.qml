@@ -2,7 +2,8 @@ import bb.cascades 1.0
 import tb.ntb 1.0
 
 TabbedPane {
-    
+    property bool startUpSheetWasShown: false
+
     showTabsOnActionBar: true
     activeTab: flowerTab
 // Menu
@@ -173,5 +174,14 @@ TabbedPane {
                 source: "asset:///AskRandom/AskRandomTab.qml"
             }
         ]
+    }
+    attachedObjects: DonateSheet {
+        id: donateSheet
+    }
+    onCreationCompleted: {
+        if (! startUpSheetWasShown) {
+            startUpSheetWasShown = true
+            donateSheet.open()
+        }
     }
 }
