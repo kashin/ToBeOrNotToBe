@@ -8,5 +8,8 @@ assets/images/*
 assets/*.preview*
 assets/Ball/.preview*
 assets/AskRandom/*.preview*
+assets/720x720/.preview*
+assets/720x720/Ball/.preview*
+assets/720x720/AskRandom/.preview*
 .settings/*
 *Makefile*
