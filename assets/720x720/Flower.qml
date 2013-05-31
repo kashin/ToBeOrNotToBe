@@ -124,10 +124,10 @@ Container {
     }
 
     function takeOneLeaf() {
-        updateLovesMeText()
         if (flowerContainer.count() > 2) {
+            updateLovesMeText()
             flowerContainer.lovesMe = ! flowerContainer.lovesMe;
-            flowerContainer.remove(flowerContainer.at(flowerContainer.count() - 3))
+            flowerContainer.remove(flowerContainer.at(flowerContainer.count() - 2))
         }
     }
 

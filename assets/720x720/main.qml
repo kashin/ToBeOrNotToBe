@@ -22,9 +22,14 @@ TabbedPane {
                         title = qsTr("Sounds on");
                     }
                 }
-                onTriggered: {
-                    applicationSettings.mute = !applicationSettings.mute;
+
+                function muteSound() {
+                    applicationSettings.mute = ! applicationSettings.mute;
                     updateSoundsAction();
+                }
+
+                onTriggered: {
+                    muteSound()
                 }
                 onCreationCompleted: {
                     updateSoundsAction();
@@ -113,7 +118,6 @@ TabbedPane {
                     id: muteShortcut
                     key: "m"
                     onTriggered: {
-                        console.log("MUHAHA")
                         muteAction.triggered()
                     }
                 }
@@ -145,6 +149,7 @@ TabbedPane {
         onTriggered: {
             if (content == undefined) {
                 var ballPageCreated = ballTabDef.createObject(parent);
+                ballPageCreated.muteSoundTriggered.connect(muteAction.muteSound);
                 content = ballPageCreated;
             }
             content.activeTab = true
@@ -157,6 +162,7 @@ TabbedPane {
         onTriggered: {
             if (content == undefined) {
                 var createdTab = askRandomTabDef.createObject(parent);
+                createdTab.muteSoundTriggered.connect(muteAction.muteSound);
                 content = createdTab;
             }
             ballTab.content.activeTab = false

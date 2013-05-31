@@ -4,10 +4,26 @@ import tb.ntb 1.0
 Page {
     id: askRandomPage
     inputRoute.primaryKeyTarget: true
-    titleBar: TitleBar {
-                  appearance: TitleBarAppearance.Plain
-                  title: qsTr("Ask Probability Of The Event")
-              }
+
+    signal muteSoundTriggered()
+
+    shortcuts: [
+        Shortcut {
+            id: askRandomShortcut
+            key: "Space"
+            onTriggered: {
+                askTapHandler.processTap()
+            }
+        },
+        Shortcut {
+            id: muteShortcut
+            key: "m"
+            onTriggered: {
+                askRandomPage.muteSoundTriggered()
+            }
+        }
+    ]
+
     Container {
         id: rootContainer
         layout: DockLayout {}
@@ -35,7 +51,8 @@ Page {
             }
             gestureHandlers: [
                 TapHandler {
-                    onTapped: {
+                    id: askTapHandler
+                    function processTap() {
                         outputLabel.textStyle.fontSize = FontSize.PointValue;
                         outputLabel.textStyle.fontSizeValue = 40;
                         var value = Math.ceil(Math.random() * 99);
@@ -43,6 +60,9 @@ Page {
                         player.stop()
                         player.sourceUrl = "asset:///sounds/ask_me_tap.ogg"
                         player.playSound()
+                    }
+                    onTapped: {
+                        processTap()
                     }
                 }
             ]

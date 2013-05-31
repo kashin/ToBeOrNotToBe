@@ -8,10 +8,24 @@ Page {
     property bool activeTab: false
     inputRoute.primaryKeyTarget: true
 
-    titleBar: TitleBar {
-        appearance: TitleBarAppearance.Plain
-        title: qsTr("Ask me...")
-    }
+    signal muteSoundTriggered()
+
+    shortcuts: [
+        Shortcut {
+            id: triggerBallShortcut
+            key: "Space"
+            onTriggered: {
+                ball.processTap()
+            }
+        },
+        Shortcut {
+            id: muteShortcut
+            key: "m"
+            onTriggered: {
+                magicBall.muteSoundTriggered()
+            }
+        }
+    ]
 
     Container {
         id: ballContainer

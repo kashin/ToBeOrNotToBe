@@ -64,10 +64,10 @@ Page {
                 player.playSound();
             }
             onFlowerCenterTapedChanged: {
-                if (lovesMeTab.actionBarVisibility == ChromeVisibility.Visible) {
+                if (lovesMeTab.actionBarVisibility == ChromeVisibility.Overlay) {
                     lovesMeTab.actionBarVisibility = ChromeVisibility.Hidden
                 } else {
-                    lovesMeTab.actionBarVisibility = ChromeVisibility.Visible
+                    lovesMeTab.actionBarVisibility = ChromeVisibility.Overlay
                 }
             }
         }
