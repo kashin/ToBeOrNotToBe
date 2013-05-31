@@ -109,9 +109,8 @@
     <asset path="icon.png">icon.png</asset>
     <asset path="assets">assets</asset>
     <!-- Locale support -->
-    <asset path="translations" dest="qm">
-        <include name="*.qm"/>
-    </asset>
+    <asset path="translations/ToBeOrNotToBe.qm"  dest="qm/ToBeOrNotToBe.qm">ToBeOrNotToBe.qm</asset>
+    <asset path="translations/ToBeOrNotToBe_ru.qm"  dest="qm/ToBeOrNotToBe_ru.qm">ToBeOrNotToBe_ru.qm</asset>
     
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
